@@ -15,3 +15,6 @@
  */
 
 #pragma once
+
+#define CAPS_WORD_INVERT_ON_SHIFT
+#define CAPS_WORD_IDLE_TIMEOUT 0  // disable timeout
