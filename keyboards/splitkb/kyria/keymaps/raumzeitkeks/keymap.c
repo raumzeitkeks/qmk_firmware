@@ -166,12 +166,18 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_LEFT:
         case KC_RIGHT:
-        case C(KC_LEFT):
-        case C(KC_RIGHT):
-        case S(KC_LEFT):
-        case S(KC_RIGHT):
-        case S(C(KC_LEFT)):
-        case S(C(KC_RIGHT)): {
+        case LCTL(KC_LEFT):
+        case LCTL(KC_RIGHT):
+        case RCTL(KC_LEFT):
+        case RCTL(KC_RIGHT):
+        case LSFT(KC_LEFT):
+        case LSFT(KC_RIGHT):
+        case RSFT(KC_LEFT):
+        case RSFT(KC_RIGHT):
+        case LSFT(LCTL(KC_LEFT)):
+        case LSFT(LCTL(KC_RIGHT)):
+        case RSFT(RCTL(KC_LEFT)):
+        case RSFT(RCTL(KC_RIGHT)): {
             return true;
         }
     }
