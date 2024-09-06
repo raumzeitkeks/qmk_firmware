@@ -15,64 +15,73 @@
  */
 #include QMK_KEYBOARD_H
 
-#include "action.h"
-#include "modifiers.h"
-#include "quantum.h"
-
-#include "keycodes.h"
 #include "keymap_german.h"
 
 enum layers {
     _BASE = 0,
-    _UMLAUT,
-    _SYM,
-    _NUM,
+    _UMLT,
+    _SYMB,
+    _NMBR,
     _MATH,
-    _FN,
-    _NAV,
+    _FUNC,
+    _NAVI,
 };
 
 enum custom_keycodes {
     _DUMMY = SAFE_RANGE,
 
-    // Symbols (must be in the same order as in the symbols array!)
+    // Must be in the same order as in the symbols array!
     _SYMBOLS_START,
-    SYM_TILD_NO,
-    SYM_COMM_SCLN,
-    SYM_EXLM_QUES,
-    SYM_DOT_COLN,
-    SYM_DLR_HASH,
-    SYM_QUOT_DQUO,
-    SYM_EQL_GRV,
-    SYM_CIRC_DEG,
-    SYM_LPRN_LBRC,
-    SYM_RPRN_RBRC,
-    SYM_LCBR_LABK,
-    SYM_RCBR_RABK,
-    SYM_EURO_AT,
-    SYM_SLSH_BSLS,
-    SYM_ASTR_PIPE,
-    SYM_PLUS_AMPR,
-    SYM_PERC_NO,
-    SYM_MINS_UNDS,
-    MATH_TILD,
-    MATH_COMM,
-    MATH_DOT,
-    MATH_EQL,
-    MATH_CIRC,
-    MATH_LPRN,
-    MATH_RPRN,
-    MATH_LABK,
-    MATH_RABK,
-    MATH_EURO,
-    MATH_SLSH,
-    MATH_ASTR,
-    MATH_PLUS,
-    MATH_PERC,
-    MATH_MINS,
+    SYM_TILD,
+    SYM_COMM,
+    SYM_EXLM,
+    SYM_DOT,
+    SYM_DLR,
+    SYM_QUOT,
+    SYM_EQL,
+    SYM_CIRC,
+    SYM_LPRN,
+    SYM_RPRN,
+    SYM_LCBR,
+    SYM_RCBR,
+    SYM_EURO,
+    SYM_SLSH,
+    SYM_ASTR,
+    SYM_PLUS,
+    SYM_PERC,
+    SYM_MINS,
+    NUM_TILD,
+    NUM_COMM,
+    NUM_DOT,
+    NUM_EQL,
+    NUM_CIRC,
+    NUM_LPRN,
+    NUM_RPRN,
+    NUM_LABK,
+    NUM_RABK,
+    NUM_EURO,
+    NUM_SLSH,
+    NUM_ASTR,
+    NUM_PLUS,
+    NUM_PERC,
+    NUM_MINS,
     _SYMBOLS_STOP,
     _SYMBOLS_NUM = _SYMBOLS_STOP - _SYMBOLS_START - 1,
-    // Symbols End
+
+    _NAVIGATION_START,
+    NAV_COPY,
+    NAV_PSTE,
+    NAV_UNDO,
+    NAV_MUTE,
+    _NAVIGATION_STOP,
+    _NAVIGATION_NUM = _NAVIGATION_STOP - _NAVIGATION_START - 1,
+
+    _TAPPING_START,
+    TAP_INCR,
+    TAP_DECR,
+    TAP_SHOW,
+    _TAPPING_STOP,
+    _TAPPING_NUM = _TAPPING_STOP - _TAPPING_START - 1,
 };
 
 typedef struct {
@@ -103,21 +112,21 @@ const symbol_t symbols[_SYMBOLS_NUM + 1] = {
     { DE_PLUS, DE_AMPR, false, false },  // SYM_PLUS_AMPR
     { DE_PERC, KC_NO,   false, false },  // SYM_PERC_NO
     { DE_MINS, DE_UNDS, false, false },  // SYM_MINS_UNDS
-    { DE_TILD, DE_TILD, false, false },  // MATH_TILD
-    { DE_COMM, DE_COMM, false, false },  // MATH_COMM
-    { DE_DOT,  DE_DOT,  false, false },  // MATH_DOT
-    { DE_EQL,  DE_EQL,  false, false },  // MATH_EQL
-    { DE_CIRC, DE_CIRC, true,  true  },  // MATH_CIRC
-    { DE_LPRN, DE_LPRN, false, false },  // MATH_LPRN
-    { DE_RPRN, DE_RPRN, false, false },  // MATH_RPRN
-    { DE_LABK, DE_LABK, false, false },  // MATH_LABK
-    { DE_RABK, DE_RABK, false, false },  // MATH_RABK
-    { DE_EURO, DE_EURO, false, false },  // MATH_EURO
-    { DE_SLSH, DE_SLSH, false, false },  // MATH_SLSH
-    { DE_ASTR, DE_ASTR, false, false },  // MATH_ASTR
-    { DE_PLUS, DE_PLUS, false, false },  // MATH_PLUS
-    { DE_PERC, DE_PERC, false, false },  // MATH_PERC
-    { DE_MINS, DE_MINS, false, false },  // MATH_MINS
+    { DE_TILD, DE_TILD, false, false },  // NUM_TILD
+    { DE_COMM, DE_COMM, false, false },  // NUM_COMM
+    { DE_DOT,  DE_DOT,  false, false },  // NUM_DOT
+    { DE_EQL,  DE_EQL,  false, false },  // NUM_EQL
+    { DE_CIRC, DE_CIRC, true,  true  },  // NUM_CIRC
+    { DE_LPRN, DE_LPRN, false, false },  // NUM_LPRN
+    { DE_RPRN, DE_RPRN, false, false },  // NUM_RPRN
+    { DE_LABK, DE_LABK, false, false },  // NUM_LABK
+    { DE_RABK, DE_RABK, false, false },  // NUM_RABK
+    { DE_EURO, DE_EURO, false, false },  // NUM_EURO
+    { DE_SLSH, DE_SLSH, false, false },  // NUM_SLSH
+    { DE_ASTR, DE_ASTR, false, false },  // NUM_ASTR
+    { DE_PLUS, DE_PLUS, false, false },  // NUM_PLUS
+    { DE_PERC, DE_PERC, false, false },  // NUM_PERC
+    { DE_MINS, DE_MINS, false, false },  // NUM_MINS
 };
 
 size_t get_symbol_index(uint16_t keycode) {
@@ -125,8 +134,12 @@ size_t get_symbol_index(uint16_t keycode) {
 }
 
 bool process_symbols(uint16_t keycode, keyrecord_t *record) {
+    if (keycode <= _SYMBOLS_START || _SYMBOLS_STOP <= keycode) {
+        return true;
+    }
+
     static uint16_t registered_keycode = KC_NO;
-    static bool registered_dead = false;
+    static bool is_registered_dead = false;
 
     // If a custom shift key is registered, then this event is either
     // releasing it or manipulating another key at the same time.
@@ -134,9 +147,9 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
     if (registered_keycode != KC_NO) {
         unregister_code16(registered_keycode);
         registered_keycode = KC_NO;
-        if (registered_dead) {
+        if (is_registered_dead) {
             tap_code16(KC_SPACE);
-            registered_dead = false;
+            is_registered_dead = false;
         }
     }
 
@@ -150,7 +163,7 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
         return true;
     }
 
-    // Get current modifiers
+    // Get modifier state
     const uint8_t mods = get_mods();
     const uint8_t weak_mods = get_mods();
     const uint8_t oneshot_mods = get_mods();
@@ -173,7 +186,7 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
     // Register keycode
     register_code16(symbol_keycode);
     registered_keycode = symbol_keycode;
-    registered_dead = is_dead_symbol;
+    is_registered_dead = is_dead_symbol;
 
     // Reset modifiers to original state
     set_mods(mods);
@@ -183,63 +196,177 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
     return false;
 }
 
+bool process_navigation(uint16_t keycode, keyrecord_t *record) {
+    if (keycode <= _NAVIGATION_START || _NAVIGATION_STOP <= keycode) {
+        return true;
+    }
+
+    // Get modifier state
+    const uint8_t mods = get_mods();
+    const uint8_t weak_mods = get_mods();
+    const uint8_t oneshot_mods = get_mods();
+    const uint8_t effective_mods = mods | weak_mods | oneshot_mods;
+    const bool is_shift_pressed = (effective_mods & MOD_MASK_SHIFT) != 0;
+
+    clear_weak_mods();
+    clear_oneshot_mods();
+    clear_mods();
+
+    switch (keycode) {
+        case NAV_COPY: tap_code16(is_shift_pressed ? C(DE_X) : C(DE_C)); break;
+        case NAV_PSTE: tap_code16(C(DE_V)); break;
+        case NAV_UNDO: tap_code16(is_shift_pressed ? C(DE_Y) : C(DE_Z)); break;
+        case NAV_MUTE: tap_code16(KC_MUTE); break;
+    }
+
+    // Reset modifiers to original state
+    set_mods(mods);
+    set_weak_mods(weak_mods);
+    set_oneshot_mods(oneshot_mods);
+
+    return false;
+}
+
+uint16_t g_tapping_term = TAPPING_TERM;
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        default: return g_tapping_term;
+    }
+}
+
+void print_number(const char* str) {
+    for (; *str != '\0'; ++str) {
+        switch (*str) {
+            case '0': tap_code(DE_0);
+            case '1': tap_code(DE_1);
+            case '2': tap_code(DE_2);
+            case '3': tap_code(DE_3);
+            case '4': tap_code(DE_4);
+            case '5': tap_code(DE_5);
+            case '6': tap_code(DE_6);
+            case '7': tap_code(DE_7);
+            case '8': tap_code(DE_8);
+            case '9': tap_code(DE_9);
+        }
+    }
+}
+
+bool process_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    if (keycode <= _TAPPING_START || _TAPPING_STOP <= keycode) {
+        return true;
+    }
+
+    switch (keycode) {
+        case TAP_INCR: g_tapping_term += 10; break;
+        case TAP_DECR: g_tapping_term -= 10; break;
+        case TAP_SHOW: {
+            const char* str = get_u16_str(g_tapping_term, ' ');
+            for (; *str != '\0'; ++str) {
+                if ('0' <= *str && *str <= '9') {
+                    const uint8_t lut[] = { DE_0, DE_1, DE_2, DE_3, DE_4, DE_5, DE_6, DE_7, DE_8, DE_9 };
+                    tap_code(lut[*str - '0']);
+                }
+            }
+            break;
+        }
+    }
+
+    return false;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return (
-        process_symbols(keycode, record)
+        process_symbols(keycode, record) &&
+        process_navigation(keycode, record) &&
+        process_tapping_term(keycode, record)
     );
 }
 
-#define UMLAUT_T(kc) LT(_UMLAUT, kc)
-#define SYM_T(kc) LT(_SYM, kc)
-#define NUM_T(kc) LT(_NUM, kc)
-#define MATH_T(kc) LT(_MATH, kc)
-#define FN_T(kc) LT(_FN, kc)
-#define NAV_T(kc) LT(_NAV, kc)
+#define TO_BASE TO(_BASE)
+#define TO_UMLT TO(_UMLT)
+#define TO_SYMB TO(_SYMB)
+#define TO_NMBR TO(_NMBR)
+#define TO_MATH TO(_MATH)
+#define TO_FUNC TO(_FUNC)
+#define TO_NAVI TO(_NAVI)
+
+#define MO_UMLT MO(_UMLT)
+#define MO_SYMB MO(_SYMB)
+#define MO_NMBR MO(_NMBR)
+#define MO_MATH MO(_MATH)
+#define MO_FUNC MO(_FUNC)
+#define MO_NAVI MO(_NAVI)
+
+#define UMLT(kc) LT(_UMLT, kc)
+#define SYMB(kc) LT(_SYMB, kc)
+#define NMBR(kc) LT(_NMBR, kc)
+#define MATH(kc) LT(_MATH, kc)
+#define FUNC(kc) LT(_FUNC, kc)
+#define NAVI(kc) LT(_NAVI, kc)
+
+#define LG(kc) LGUI_T(kc)
+#define LC(kc) LCTL_T(kc)
+#define LS(kc) LSFT_T(kc)
+#define LA(kc) LALT_T(kc)
+#define RG(kc) RGUI_T(kc)
+#define RC(kc) RCTL_T(kc)
+#define RS(kc) RSFT_T(kc)
 
 #define _X_ KC_NO
-#define ___ KC_TRNS
+#define __XXX__ KC_NO
+
+#define TUP TAP_INCR
+#define TDN TAP_DECR
+#define TSH TAP_SHOW
+
+#define DENSE_LAYOUT(L31, L32, L33, L34, L35, R35, R34, R33, R32, R31, L20, L21, L22, L23, L24, L25, R25, R24, R23, R22, R21, R20, L11, L12, L13, L14, L15, R15, R14, R13, R12, R11, L01, L02, L03, L04, R04, R03, R02, R01) \
+    LAYOUT( _X_, L31, L32, L33, L34, L35,                     R35, R34, R33, R32, R31, _X_, \
+            L20, L21, L22, L23, L24, L25,                     R25, R24, R23, R22, R21, R20, \
+            _X_, L11, L12, L13, L14, L15, TDN, TUP, TSH, _X_, R15, R14, R13, R12, R11, _X_, \
+                           _X_, L01, L02, L03, L04, R04, R03, R02, R01, _X_ )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT(
-     _X_, DE_V, DE_W, DE_M, DE_G, DE_K, DE_J, FN_T(SYM_COMM_SCLN), SYM_DOT_COLN, SYM_QUOT_DQUO, DE_B, _X_,
-     DE_Q, LGUI_T(DE_S), LCTL_T(DE_C), LSFT_T(DE_N), SYM_T(DE_T), TO(_MATH), CW_TOGG, NAV_T(DE_A), RSFT_T(DE_E), RCTL_T(DE_I), RGUI_T(DE_H), DE_Z,
-     _X_, DE_X, DE_P, DE_L, UMLAUT_T(DE_D), TO(_NAV), _X_, _X_, _X_, _X_, TO(_SYM), NUM_T(DE_U), DE_O, DE_Y, DE_F, _X_,
-     _X_, KC_DEL, KC_BSPC, LALT_T(DE_R), KC_TAB, KC_ESC, LALT_T(KC_SPC), KC_ENT, KC_INS, _X_
+    [_BASE] = DENSE_LAYOUT(
+              DE_V,     DE_W,     DE_M,     DE_G,       DE_K,              DE_J,     FUNC(SYM_COMM), SYM_DOT,  SYM_QUOT,  DE_B,
+        DE_Q, LG(DE_S), LC(DE_C), LS(DE_N), SYMB(DE_T), TO_MATH,           CW_TOGG,  NAVI(DE_A),     RS(DE_E), RC(DE_I),  RG(DE_H), DE_Z,
+              DE_X,     DE_P,     DE_L,     UMLT(DE_D), TO_NAVI,           TO_SYMB,  NMBR(DE_U),     DE_O,     DE_Y,      DE_F,
+                        KC_DEL,   KC_BSPC,  LA(DE_R),   KC_TAB,            KC_ESC,   LA(KC_SPC),     KC_ENT,   KC_INS
     ),
-    [_UMLAUT] = LAYOUT(
-     _X_, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, _X_,
-     ___, DE_SS, KC_LCTL, KC_LSFT, ___, _X_, CW_TOGG, DE_ADIA, ___, ___, ___, ___,
-     _X_, ___, ___, ___, MO(_UMLAUT), _X_, _X_, _X_, _X_, _X_, _X_, DE_UDIA, DE_ODIA, ___, ___, _X_,
-     _X_, ___, ___, KC_LALT, ___, ___, KC_SPC, ___, ___, _X_
+    [_UMLT] = DENSE_LAYOUT(
+                    _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______,
+           _______, DE_SS,   KC_LCTL, KC_LSFT, _______, __XXX__,            CW_TOGG, DE_ADIA, _______, _______, _______, _______,
+                    _______, _______, _______, MO_UMLT, __XXX__,            __XXX__, DE_UDIA, DE_ODIA, _______, _______,
+                             _______, _______, KC_LALT, _______,            _______, KC_SPC,  _______, _______
     ),
-    [_SYM] = LAYOUT(
-     _X_, _X_, _X_, _X_, _X_, _X_, SYM_TILD_NO, SYM_EXLM_QUES, SYM_DLR_HASH, SYM_EQL_GRV, SYM_CIRC_DEG, _X_,
-     _X_, KC_LGUI, KC_LCTL, KC_LSFT, MO(_SYM), _X_, _X_, SYM_LPRN_LBRC, SYM_RPRN_RBRC, SYM_LCBR_LABK, SYM_RCBR_RABK, SYM_EURO_AT,
-     _X_, _X_, _X_, _X_, _X_, TO(_NAV), _X_, _X_, _X_, _X_, TO(_BASE), SYM_SLSH_BSLS, SYM_ASTR_PIPE, SYM_PLUS_AMPR, SYM_PERC_NO, _X_,
-     _X_, ___, ___, KC_LALT, ___, ___, KC_LALT, ___, ___, _X_
+    [_SYMB] = DENSE_LAYOUT(
+                    __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            SYM_TILD, SYM_EXLM, SYM_DLR,  SYM_EQL, SYM_CIRC,
+           __XXX__, KC_LGUI, KC_LCTL, KC_LSFT, MO_SYMB, __XXX__,            __XXX__, SYM_LPRN, SYM_RPRN, SYM_LCBR, SYM_RCBR, SYM_EURO,
+                    __XXX__, __XXX__, __XXX__, __XXX__, TO_NAVI,             TO_BASE, SYM_SLSH, SYM_ASTR, SYM_PLUS, SYM_PERC,
+                             _______, _______, KC_LALT, _______,            _______,  SYM_MINS, _______,  _______
     ),
-    [_NUM] = LAYOUT(
-     _X_, _X_, DE_7, DE_8, DE_9, _X_, _X_, _X_, _X_, _X_, _X_, _X_,
-     _X_, _X_, DE_1, DE_2, DE_3, TO(_MATH), _X_, _X_, KC_RSFT, KC_RCTL, KC_RGUI, _X_,
-     _X_, _X_, DE_4, DE_5, DE_6, TO(_NAV), _X_, _X_, _X_, _X_, TO(_SYM), MO(_NUM), _X_, _X_, _X_, _X_,
-     _X_, ___, ___, DE_0, ___, ___, KC_LALT, ___, ___, _X_
+    [_NMBR] = DENSE_LAYOUT(
+                       __XXX__, DE_7,    DE_8,    DE_9, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+              __XXX__, __XXX__, DE_1,    DE_2,    DE_3, TO_MATH,            __XXX__, __XXX__, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
+                       __XXX__, DE_4,    DE_5,    DE_6, TO_NAVI,             TO_SYMB,  MO_NMBR,  __XXX__, __XXX__, __XXX__,
+                                _______, _______, DE_0, _______,            _______, KC_LALT, _______, _______
     ),
-    [_MATH] = LAYOUT(
-     _X_, _X_, DE_7, DE_8, DE_9, _X_, MATH_TILD, MATH_COMM, MATH_DOT, MATH_EQL, MATH_CIRC, _X_,
-     _X_, _X_, DE_1, DE_2, DE_3, TO(_BASE), _X_, MATH_LPRN, MATH_RPRN, MATH_LABK, MATH_RABK, MATH_EURO,
-     _X_, _X_, DE_4, DE_5, DE_6, TO(_NAV), _X_, _X_, _X_, _X_, TO(_SYM), MATH_SLSH, MATH_ASTR, MATH_PLUS, MATH_PERC, _X_,
-     _X_, ___, ___, DE_0, ___, ___, MATH_MINS, ___, ___, _X_
+    [_MATH] = DENSE_LAYOUT(
+                       __XXX__, DE_7,    DE_8,    DE_9, __XXX__,            NUM_TILD, NUM_COMM, NUM_DOT,  NUM_EQL,  NUM_CIRC,
+              __XXX__, __XXX__, DE_1,    DE_2,    DE_3, TO_BASE,            __XXX__,  NUM_LPRN, NUM_RPRN, NUM_LABK, NUM_RABK, NUM_EURO,
+                       __XXX__, DE_4,    DE_5,    DE_6, TO_NAVI,            TO_SYMB,  NUM_SLSH, NUM_ASTR, NUM_PLUS, NUM_PERC,
+                                _______, _______, DE_0, _______,            _______,  NUM_MINS, _______, _______
     ),
-    [_FN] = LAYOUT(
-     _X_, KC_F10, KC_F7, KC_F8, KC_F9, _X_, _X_, MO(_FN), _X_, _X_, _X_, _X_,
-     _X_, KC_F11, KC_F1, KC_F2, KC_F3, TO(_MATH), _X_, _X_, KC_RSFT, KC_RCTL, KC_RGUI, _X_,
-     _X_, KC_F12, KC_F4, KC_F5, KC_F6, TO(_NAV), _X_, _X_, _X_, _X_, TO(_SYM), _X_, _X_, _X_, _X_, _X_,
-     _X_, ___, ___, KC_LALT, ___, ___, KC_LALT, ___, ___, _X_
+    [_FUNC] = DENSE_LAYOUT(
+                     KC_F10, KC_F7,   KC_F8,   KC_F9,   KC_MUTE,            __XXX__, MO_FUNC,   __XXX__, __XXX__, __XXX__,
+            __XXX__, KC_F11, KC_F1,   KC_F2,   KC_F3,   KC_VOLD,            __XXX__, __XXX__, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
+                     KC_F12, KC_F4,   KC_F5,   KC_F6,   KC_VOLU,             TO_SYMB,  __XXX__, __XXX__, __XXX__, __XXX__,
+                             _______, _______, KC_LALT, _______,            _______, KC_LALT, _______, _______
     ),
-    [_NAV] = LAYOUT(
-     _X_, KC_PGUP, C(DE_X), C(DE_C), KC_UP, KC_END, _X_, _X_, _X_, _X_, _X_, _X_,
-     KC_HOME, KC_LEFT, KC_LCTL, KC_LSFT, KC_RIGHT, _X_, _X_, MO(_NAV), KC_RSFT, KC_RCTL, KC_RGUI, _X_,
-     _X_, KC_PGDN, _X_, C(DE_V), KC_DOWN, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_,
-     _X_, ___, ___, KC_LALT, ___, ___, KC_LALT, ___, ___, _X_
+    [_NAVI] = DENSE_LAYOUT(
+                 KC_PGUP, NAV_COPY, NAV_PSTE, KC_UP,    KC_END,             __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+        KC_HOME, KC_LEFT, KC_LCTL,  KC_LSFT,  KC_RIGHT, __XXX__,            __XXX__, MO_NAVI,  KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
+                 KC_PGDN, NAV_UNDO, NAV_MUTE, KC_DOWN,  __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+                          _______,  _______,  KC_LALT,  _______,            _______, KC_LALT, _______, _______
     ),
 };
