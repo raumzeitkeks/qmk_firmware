@@ -73,7 +73,7 @@ bool process_shortcut(uint16_t keycode, keyrecord_t *record) {
     const bool is_shift_pressed = ((mods | weak_mods | oneshot_mods) & MOD_MASK_SHIFT) != 0;
 
     uint16_t shortcut_keycode = KC_NO;
-    switch (QK_MOD_TAP_GET_TAP_KEYCODE(keycode)) {
+    switch (QK_MODS_GET_BASIC_KEYCODE(keycode)) {
         case KC_CUT: {
             shortcut_keycode = C(DE_X);
             break;
@@ -146,6 +146,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         process_tapping_term(keycode, record) &&
         process_shortcut(keycode, record)
     );
+}
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        case DE_A ... DE_Z:
+        case DE_ADIA:
+        case DE_ODIA:
+        case DE_UDIA:
+        case DE_SS: {
+            add_weak_mods(MOD_BIT_LSHIFT);
+            return true;
+        }
+
+        case KC_1 ... KC_0:
+        case DE_MINS:
+        case DE_UNDS:
+        case KC_BSPC:
+        case KC_DEL: {
+            return true;
+        }
+    }
+    return false;
 }
 
 #define TO_BASE TO(_BASE)
