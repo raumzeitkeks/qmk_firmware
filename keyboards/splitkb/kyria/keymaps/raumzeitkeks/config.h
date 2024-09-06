@@ -19,5 +19,5 @@
 #define CAPS_WORD_INVERT_ON_SHIFT
 #define CAPS_WORD_IDLE_TIMEOUT 0  // disable timeout
 
+#define TAPPING_TERM_PER_KEY  // enable get_tapping_term() function
 #define QUICK_TAP_TERM 0  // disable double-tap auto-repeat
-// #define PERMISSIVE_HOLD  // activate hold action before tapping term when other key is pressed and released
