@@ -69,6 +69,7 @@ enum custom_keycodes {
     _SYMBOLS_NUM = _SYMBOLS_STOP - _SYMBOLS_START - 1,
 
     _NAVIGATION_START,
+    CN_CUT,
     CN_COPY,
     CN_PSTE,
     CN_UNDO,
@@ -213,7 +214,8 @@ bool process_navigation(uint16_t keycode, keyrecord_t *record) {
     clear_mods();
 
     switch (keycode) {
-        case CN_COPY: tap_code16(is_shift_pressed ? C(DE_X) : C(DE_C)); break;
+        case CN_CUT:  tap_code16(C(DE_X)); break;
+        case CN_COPY: tap_code16(C(DE_C)); break;
         case CN_PSTE: tap_code16(C(DE_V)); break;
         case CN_UNDO: tap_code16(is_shift_pressed ? C(DE_Y) : C(DE_Z)); break;
         case CN_MUTE: tap_code16(KC_MUTE); break;
@@ -331,45 +333,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-              DE_V,     DE_W,     DE_M,     DE_G,       TO_NAVI,            CW_TOGG, CS_DOT,     CS_COMM,  CS_QUOT,  DE_B,
-        DE_Q, LG(DE_S), LC(DE_C), LS(DE_N), SYMB(DE_T), DE_K,               DE_J,    NMBR(DE_A), RS(DE_E), RC(DE_I), RG(DE_H), DE_Z,
-              DE_X,     DE_P,     DE_L,     UMLT(DE_D), TO_MATH,            TO_SYMB, FUNC(DE_U), DE_O,     DE_Y,     DE_F,
-                        KC_DEL,   KC_TAB,   NAVI(DE_R), KC_BSPC,            KC_ESC,  LA(KC_SPC), KC_ENT,   KC_INS
+                        DE_V,     DE_W,     DE_M,       DE_G,       TO_NAVI,            CW_TOGG, CS_DOT,     CS_COMM,    CS_QUOT,  DE_B,
+              LG(DE_Q), LS(DE_S), LC(DE_C), UMLT(DE_N), SYMB(DE_T), DE_K,               DE_J,    NAVI(DE_A), NMBR(DE_E), RC(DE_I), RS(DE_H), RG(DE_Z),
+                        DE_X,     DE_P,     DE_L,       DE_D,       KC_MUTE,            TO_MATH, DE_U,       FUNC(DE_O), DE_Y,     DE_F,
+                                  KC_DEL,   KC_TAB,     LA(DE_R),   KC_BSPC,            KC_ESC,  LA(KC_SPC), KC_ENT,   KC_INS
     ),
     [_UMLT] = DENSE_LAYOUT(
-                    _______, _______, _______, _______, __XXX__,            _______, _______, _______, _______, _______,
-           _______, DE_SS,   _______, _______, _______, _______,            _______, DE_ADIA, _______, _______, _______, _______,
-                    _______, _______, _______, MO_UMLT, __XXX__,            __XXX__, DE_UDIA, DE_ODIA, _______, _______,
-                             _______, _______, _______, _______,            _______, _______,  _______, _______
+                                _______, _______, _______, _______, __XXX__,            CW_TOGG, _______, _______, _______, _______,
+                       _______, DE_SS,   _______, MO_UMLT, _______, _______,            _______, DE_ADIA, _______, _______, _______, DE_SS,
+                                _______, _______, _______, _______, _______,            __XXX__, DE_UDIA, DE_ODIA, _______, _______,
+                                         _______, _______, _______, _______,            _______, _______,  _______, _______
     ),
     [_SYMB] = DENSE_LAYOUT(
-                    __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            _______, CS_EXLM, CS_DLR,  CS_EQL,  CS_CIRC,
-           __XXX__, KC_LGUI, KC_LCTL, KC_LSFT, MO_SYMB, __XXX__,            CS_TILD, CS_LPRN, CS_RPRN, CS_LCBR, CS_RCBR, CS_EURO,
-                    __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            TO_BASE, CS_SLSH, CS_ASTR, CS_PLUS, CS_PERC,
-                             _______, _______, KC_LALT, _______,            _______, CS_MINS, _______,  _______
+                                __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, CS_EXLM, CS_DLR,  CS_EQL,  CS_CIRC,
+                       KC_LGUI, KC_LSFT, KC_LCTL, __XXX__, MO_SYMB, __XXX__,            CS_TILD, CS_LPRN, CS_RPRN, CS_LCBR, CS_RCBR, CS_EURO,
+                                __XXX__, __XXX__, __XXX__, __XXX__, _______,            __XXX__, CS_SLSH, CS_ASTR, CS_PLUS, CS_PERC,
+                                         _______, _______, KC_LALT, _______,            _______, CS_MINS, _______,  _______
     ),
     [_NMBR] = DENSE_LAYOUT(
-                       __XXX__, DE_7,    DE_8,    DE_9, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-              __XXX__, __XXX__, DE_1,    DE_2,    DE_3, __XXX__,            __XXX__, MO_NMBR, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
-                       __XXX__, DE_4,    DE_5,    DE_6, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-                                _______, _______, DE_0, _______,            _______, KC_LALT, _______, _______
+                                   __XXX__, DE_7,    DE_8,    DE_9, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+                          __XXX__, __XXX__, DE_1,    DE_2,    DE_3, __XXX__,            __XXX__, __XXX__, MO_NMBR, KC_RCTL, KC_RSFT, KC_RGUI,
+                                   __XXX__, DE_4,    DE_5,    DE_6, _______,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+                                            _______, _______, DE_0, _______,            _______, KC_LALT, _______, _______
     ),
     [_MATH] = DENSE_LAYOUT(
-                       __XXX__, DE_7,    DE_8,    DE_9, _______,            __XXX__, CM_COMM, CM_DOT,  CM_EQL,  CM_CIRC,
-              __XXX__, __XXX__, DE_1,    DE_2,    DE_3, __XXX__,           CM_TILD,  CM_LPRN, CM_RPRN, CM_LABK, CM_RABK, CM_EURO,
-                       __XXX__, DE_4,    DE_5,    DE_6, TO_BASE,            _______, CM_SLSH, CM_ASTR, CM_PLUS, CM_PERC,
-                                _______, _______, DE_0, _______,            _______, CM_MINS, _______,  _______
+                                   __XXX__, DE_7,    DE_8,    DE_9, _______,            __XXX__, CM_COMM, CM_DOT,  CM_EQL,  CM_CIRC,
+                          __XXX__, __XXX__, DE_1,    DE_2,    DE_3, __XXX__,            CM_TILD, CM_LPRN, CM_RPRN, CM_LABK, CM_RABK, CM_EURO,
+                                   __XXX__, DE_4,    DE_5,    DE_6, _______,            TO_BASE, CM_SLSH, CM_ASTR, CM_PLUS, CM_PERC,
+                                            _______, _______, DE_0, _______,            _______, CM_MINS, _______,  _______
     ),
     [_FUNC] = DENSE_LAYOUT(
-                     KC_F10, KC_F7,   KC_F8,   KC_F9,   __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-            __XXX__, KC_F11, KC_F1,   KC_F2,   KC_F3,   __XXX__,            __XXX__, __XXX__, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
-                     KC_F12, KC_F4,   KC_F5,   KC_F6,   __XXX__,            __XXX__, MO_FUNC, __XXX__, __XXX__, __XXX__,
-                             _______, _______, __XXX__, _______,            _______, KC_LALT, _______, _______
+                                 KC_F10, KC_F7,   KC_F8,   KC_F9,   __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+                        __XXX__, KC_F11, KC_F1,   KC_F2,   KC_F3,   __XXX__,            __XXX__, __XXX__, __XXX__, KC_RCTL, KC_RSFT, KC_RGUI,
+                                 KC_F12, KC_F4,   KC_F5,   KC_F6,   _______,            __XXX__, __XXX__, MO_FUNC, __XXX__, __XXX__,
+                                         _______, _______, KC_LALT, _______,            _______, KC_LALT, _______, _______
     ),
     [_NAVI] = DENSE_LAYOUT(
-                   KC_PGUP, CN_COPY, CN_PSTE, KC_PGDN,  TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-          KC_HOME, KC_LEFT, KC_LCTL, KC_LSFT, KC_RIGHT, KC_END,             __XXX__, __XXX__, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
-                   KC_UP,   CN_UNDO, CN_MUTE, KC_DOWN,  _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
-                            _______, _______, MO_NAVI,  _______,            _______, KC_LALT, _______, _______
+                     LS(CN_PSTE),   LC(__XXX__), KC_LEFT, KC_RIGHT, TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+        LG(KC_PGUP), LS(KC_PGDN),   LC(CN_COPY), KC_UP,   KC_DOWN,  CN_UNDO,            __XXX__, MO_NAVI, __XXX__, KC_RCTL, KC_RSFT, KC_RGUI,
+                     LG(LS(CN_CUT)), __XXX__,    KC_HOME, KC_END,   _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
+                                     _______,    _______, KC_LALT,  _______,            _______, KC_LALT, _______, _______
     ),
 };
