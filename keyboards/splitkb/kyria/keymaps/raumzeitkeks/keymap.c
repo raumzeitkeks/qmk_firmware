@@ -66,7 +66,6 @@ enum custom_keycodes {
     CM_PERC,
     CM_MINS,
     _SYMBOLS_STOP,
-    _SYMBOLS_NUM = _SYMBOLS_STOP - _SYMBOLS_START - 1,
 
     _NAVIGATION_START,
     CN_CUT,
@@ -75,14 +74,12 @@ enum custom_keycodes {
     CN_UNDO,
     CN_MUTE,
     _NAVIGATION_STOP,
-    _NAVIGATION_NUM = _NAVIGATION_STOP - _NAVIGATION_START - 1,
 
     _TAPPING_START,
     CT_INCR,
     CT_DECR,
     CT_SHOW,
     _TAPPING_STOP,
-    _TAPPING_NUM = _TAPPING_STOP - _TAPPING_START - 1,
 };
 
 typedef struct {
@@ -93,7 +90,7 @@ typedef struct {
 } symbol_t;
 
 // Must be in the same order as in the custom_keycodes enum!
-const symbol_t symbols[_SYMBOLS_NUM + 1] = {
+const symbol_t symbols[] = {
     { KC_NO,   KC_NO,   false, false },  // not a symbol
     { DE_TILD, KC_NO,   false, false },  // CS_TILD_NO
     { DE_COMM, DE_SCLN, false, false },  // CS_COMM_SCLN
@@ -369,9 +366,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          _______, _______, KC_LALT, _______,            _______, KC_LALT, _______, _______
     ),
     [_NAVI] = DENSE_LAYOUT(
-                     LS(CN_PSTE),   LC(__XXX__), KC_LEFT, KC_RIGHT, TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-        LG(KC_PGUP), LS(KC_PGDN),   LC(CN_COPY), KC_UP,   KC_DOWN,  CN_UNDO,            __XXX__, MO_NAVI, __XXX__, KC_RCTL, KC_RSFT, KC_RGUI,
-                     LG(LS(CN_CUT)), __XXX__,    KC_HOME, KC_END,   _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
-                                     _______,    _______, KC_LALT,  _______,            _______, KC_LALT, _______, _______
+                       LS(CN_PSTE), LC(__XXX__), KC_LEFT, KC_RIGHT, TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+          LG(KC_PGUP), LS(KC_PGDN), LC(CN_COPY), KC_UP,   KC_DOWN,  CN_UNDO,            __XXX__, MO_NAVI, __XXX__, KC_RCTL, KC_RSFT, KC_RGUI,
+                       CN_CUT,      __XXX__,     KC_HOME, KC_END,   _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
+                                    _______,     _______, KC_LALT,  _______,            _______, KC_LALT, _______, _______
     ),
 };
