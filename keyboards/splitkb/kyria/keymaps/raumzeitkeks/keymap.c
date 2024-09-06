@@ -330,7 +330,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 #define CTI CT_INCR
 #define CTD CT_DECR
-#define CTS CT_SHOWs
+#define CTS CT_SHOW
 
 #define DENSE_LAYOUT(L31, L32, L33, L34, L35, R35, R34, R33, R32, R31, L20, L21, L22, L23, L24, L25, R25, R24, R23, R22, R21, R20, L11, L12, L13, L14, L15, R15, R14, R13, R12, R11, L01, L02, L03, L04, R04, R03, R02, R01) \
     LAYOUT( _X_, L31, L32, L33, L34, L35,                     R35, R34, R33, R32, R31, _X_, \
