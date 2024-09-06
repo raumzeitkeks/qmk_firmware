@@ -130,13 +130,11 @@ const symbol_t symbols[_SYMBOLS_NUM + 1] = {
 };
 
 size_t get_symbol_index(uint16_t keycode) {
-    const uint16_t basic_keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-    return (_SYMBOLS_START < basic_keycode && basic_keycode < _SYMBOLS_STOP) ? basic_keycode - _SYMBOLS_START : 0;
+    return (_SYMBOLS_START < keycode && keycode < _SYMBOLS_STOP) ? keycode - _SYMBOLS_START : 0;
 }
 
 bool process_symbols(uint16_t keycode, keyrecord_t *record) {
-    const uint16_t basic_keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-    if (basic_keycode <= _SYMBOLS_START || _SYMBOLS_STOP <= basic_keycode) {
+    if (keycode <= _SYMBOLS_START || _SYMBOLS_STOP <= keycode) {
         return true;
     }
 
@@ -160,11 +158,6 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
         return true;
     }
 
-    // Continue default handling if this is a tap-hold key being held.
-    if ((IS_QK_MOD_TAP(keycode) || IS_QK_LAYER_TAP(keycode)) && record->tap.count == 0) {
-        return true;
-    }
-
     // Get modifier state
     const uint8_t mods = get_mods();
     const uint8_t weak_mods = get_mods();
@@ -173,7 +166,7 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
     const bool is_shift_pressed = (effective_mods & MOD_MASK_SHIFT) != 0;
 
     // Get symbol key information
-    const symbol_t symbol = symbols[get_symbol_index(basic_keycode)];
+    const symbol_t symbol = symbols[get_symbol_index(keycode)];
     const uint16_t symbol_keycode = is_shift_pressed ? symbol.shifted_keycode : symbol.unshifted_keycode;
     const bool is_dead_symbol = is_shift_pressed ? symbol.is_shifted_dead : symbol.is_unshifted_dead;
 
@@ -199,8 +192,7 @@ bool process_symbols(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_navigation(uint16_t keycode, keyrecord_t *record) {
-    const uint16_t basic_keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-    if (basic_keycode <= _NAVIGATION_START || _NAVIGATION_STOP <= basic_keycode) {
+    if (keycode <= _NAVIGATION_START || _NAVIGATION_STOP <= keycode) {
         return true;
     }
 
@@ -220,7 +212,7 @@ bool process_navigation(uint16_t keycode, keyrecord_t *record) {
     clear_oneshot_mods();
     clear_mods();
 
-    switch (basic_keycode) {
+    switch (keycode) {
         case CN_COPY: tap_code16(is_shift_pressed ? C(DE_X) : C(DE_C)); break;
         case CN_PSTE: tap_code16(C(DE_V)); break;
         case CN_UNDO: tap_code16(is_shift_pressed ? C(DE_Y) : C(DE_Z)); break;
@@ -259,8 +251,7 @@ void print_number(const char* str) {
 }
 
 bool process_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    const uint16_t basic_keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-    if (basic_keycode <= _TAPPING_START || _TAPPING_STOP <= basic_keycode) {
+    if (keycode <= _TAPPING_START || _TAPPING_STOP <= keycode) {
         return true;
     }
 
@@ -269,7 +260,7 @@ bool process_tapping_term(uint16_t keycode, keyrecord_t *record) {
         return true;
     }
 
-    switch (basic_keycode) {
+    switch (keycode) {
         case CT_INCR: g_tapping_term += 10; break;
         case CT_DECR: g_tapping_term -= 10; break;
         case CT_SHOW: {
@@ -376,9 +367,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______, _______, __XXX__, _______,            _______, KC_LALT, _______, _______
     ),
     [_NAVI] = DENSE_LAYOUT(
-                   KC_PGUP, CN_COPY, CN_PSTE, KC_UP,    TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
+                   KC_PGUP, CN_COPY, CN_PSTE, KC_PGDN,  TO_BASE,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
           KC_HOME, KC_LEFT, KC_LCTL, KC_LSFT, KC_RIGHT, KC_END,             __XXX__, __XXX__, KC_RSFT, KC_RCTL, KC_RGUI, __XXX__,
-                   KC_PGDN, CN_UNDO, CN_MUTE, KC_DOWN,  _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
+                   KC_UP,   CN_UNDO, CN_MUTE, KC_DOWN,  _______,            _______, __XXX__, __XXX__, __XXX__, __XXX__,
                             _______, _______, MO_NAVI,  _______,            _______, KC_LALT, _______, _______
     ),
 };
