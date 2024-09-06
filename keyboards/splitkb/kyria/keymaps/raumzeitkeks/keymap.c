@@ -162,8 +162,16 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_1 ... KC_0:
         case DE_MINS:
         case DE_UNDS:
+        case KC_DEL:
         case KC_BSPC:
-        case KC_DEL: {
+        case KC_LEFT:
+        case KC_RIGHT:
+        case C(KC_LEFT):
+        case C(KC_RIGHT):
+        case S(KC_LEFT):
+        case S(KC_RIGHT):
+        case S(C(KC_LEFT)):
+        case S(C(KC_RIGHT)): {
             return true;
         }
     }
