@@ -256,49 +256,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_ESC, DE_V,     DE_W,     DEL(DE_M),  VOL(DE_G),  DE_K,              DE_J,    VOL(DE_DOT), DEL(DE_COMM), DE_QUES,  DE_B,     DE_QUOT,
                  DE_Z,   LS(DE_S), LC(DE_C), SYM2(DE_N), SYM1(DE_T), KC_TAB,            KC_BSPC, NUM(DE_A),   FN(DE_E),     RC(DE_I), RS(DE_H), DE_Q,
                          DE_X,     LS(DE_P), LC(DE_L),   SCR(DE_D),  KC_INS,            CW_TOGG, SCR(DE_U),   RC(DE_O),     LS(DE_Y), DE_F,
-                                   MO_FN,    MO_NUM,     LA(DE_R),   KC_ENT,            KC_LGUI, LA(KC_SPC),  MO_SYM1,      MO_SYM2
+                                   MO_FN,    MO_NUM,     LA(DE_R),   KC_LGUI,           KC_ENT,  LA(KC_SPC),  MO_SYM1,      MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
                        KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            DE_TILD, DE_COLN, DE_DLR,  DE_EXLM, DE_CIRC, DE_DQUO,
                        __XXX__, KC_LCTL, KC_LALT, KC_DOWN, MO_SYM1, KC_TAB,             KC_BSPC, DE_LPRN, DE_RPRN, DE_LCBR, DE_RCBR, DE_AT,
                                 __XXX__, __XXX__, KC_UP,   __XXX__, __XXX__,            __XXX__, DE_SLSH, DE_ASTR, DE_PLUS, DE_PERC,
-                                         __XXX__, __XXX__, KC_LALT, KC_ENT,             KC_LGUI, DE_MINS, MO_SYM1, __XXX__
+                                         __XXX__, __XXX__, KC_LALT, KC_LGUI,            KC_ENT,  DE_MINS, MO_SYM1, __XXX__
     ),
     [_SYM2] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME,  KC_END,            __XXX__, DE_SCLN, DE_HASH, DE_EQL,  DE_DEG,  DE_GRV,
-                       __XXX__, KC_LCTL, KC_LALT, MO_SYM2, KC_RIGHT, KC_TAB,            KC_BSPC, DE_LBRC, DE_RBRC, DE_LABK, DE_RABK, DE_EURO,
-                                __XXX__, __XXX__, __XXX__, KC_LEFT,  __XXX__,           __XXX__, DE_BSLS, DE_PIPE, DE_AMPR, __XXX__,
-                                         __XXX__, __XXX__, KC_LALT,  KC_ENT,            KC_LGUI, DE_UNDS, __XXX__, MO_SYM2
+                      KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME,  KC_END,             __XXX__, DE_SCLN, DE_HASH, DE_EQL,  DE_DEG,  DE_GRV,
+                      __XXX__, KC_LCTL, KC_LALT, MO_SYM2, KC_RIGHT, KC_TAB,             KC_BSPC, DE_LBRC, DE_RBRC, DE_LABK, DE_RABK, DE_EURO,
+                               __XXX__, __XXX__, __XXX__, KC_LEFT,  __XXX__,            __XXX__, DE_BSLS, DE_PIPE, DE_AMPR, __XXX__,
+                                        __XXX__, __XXX__, KC_LALT,  KC_LGUI,            KC_ENT,  DE_UNDS, __XXX__, MO_SYM2
     ),
     [_NUM] = DENSE_LAYOUT(
                        KC_ESC,  __XXX__,  DE_7,    DE_8,    DE_9,   __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
                        __XXX__, LS(DE_0), DE_1,    DE_2,    DE_3,   KC_TAB,             KC_BSPC, MO_NUM,  KC_DOWN, KC_RCTL, KC_RSFT, __XXX__,
                                 __XXX__,  DE_4,    DE_5,    DE_6,   KC_INS,             __XXX__, __XXX__, KC_UP,   __XXX__, __XXX__,
-                                          __XXX__, MO_NUM,  DE_DOT, KC_ENT,             KC_LGUI, KC_LALT, __XXX__, __XXX__
+                                          __XXX__, MO_NUM,  DE_DOT, KC_LGUI,            KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_FN] = DENSE_LAYOUT(
                     KC_ESC,  KC_F12,     KC_F7,   KC_F8,   KC_F9,   __XXX__,            KC_HOME, KC_END,   __XXX__, __XXX__, __XXX__, __XXX__,
                     __XXX__, LS(KC_F10), KC_F1,   KC_F2,   KC_F3,   __XXX__,            KC_BSPC, KC_RIGHT, MO_FN,   KC_RCTL, KC_RSFT, __XXX__,
                              KC_F11,     KC_F4,   KC_F5,   KC_F6,   __XXX__,            __XXX__, KC_LEFT,  __XXX__, __XXX__, __XXX__,
-                                         MO_FN,   __XXX__, __XXX__, KC_ENT,             KC_LGUI, KC_LALT,  __XXX__, __XXX__
+                                         MO_FN,   __XXX__, __XXX__, KC_LGUI,            KC_ENT,  KC_LALT,  __XXX__, __XXX__
     ),
     [_SCR] = DENSE_LAYOUT(
                        KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
                        __XXX__, KC_LCTL, KC_LALT, KC_PGDN, __XXX__, KC_TAB,             KC_BSPC, __XXX__, KC_PGDN, KC_RCTL, KC_RSFT, __XXX__,
                                 __XXX__, __XXX__, KC_PGUP, MO_SCR,  __XXX__,            __XXX__, MO_SCR,  KC_PGUP, __XXX__, __XXX__,
-                                         __XXX__, __XXX__, KC_LALT, KC_ENT,             KC_LGUI, KC_LALT, __XXX__, __XXX__
+                                         __XXX__, __XXX__, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_DEL] = DENSE_LAYOUT(
                        KC_ESC,  __XXX__, __XXX__, MO_DEL,  KC_BSPC, KC_DEL,             KC_DEL,  KC_BSPC, MO_DEL,  __XXX__, __XXX__, __XXX__,
                        __XXX__, KC_LCTL, KC_LALT, __XXX__, __XXX__, KC_TAB,             KC_BSPC, __XXX__, __XXX__, KC_RCTL, KC_RSFT, __XXX__,
                                 __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-                                         __XXX__, __XXX__, KC_LALT, KC_ENT,             KC_LGUI, KC_LALT, __XXX__, __XXX__
+                                         __XXX__, __XXX__, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_VOL] = DENSE_LAYOUT(
                        KC_ESC,  __XXX__, __XXX__, KC_MUTE, MO_VOL,  __XXX__,            __XXX__, MO_VOL,  KC_MUTE, __XXX__, __XXX__, __XXX__,
                        __XXX__, KC_LCTL, KC_LALT, KC_VOLD, __XXX__, KC_TAB,             KC_BSPC, __XXX__, KC_VOLD, KC_RCTL, KC_RSFT, __XXX__,
                                 __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,
-                                         __XXX__, __XXX__, KC_LALT, KC_ENT,             KC_LGUI, KC_LALT, __XXX__, __XXX__
+                                         __XXX__, __XXX__, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
 };
 
