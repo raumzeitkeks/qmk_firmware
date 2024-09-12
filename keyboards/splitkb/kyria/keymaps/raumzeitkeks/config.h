@@ -21,3 +21,7 @@
 
 #define TAPPING_TERM_PER_KEY  // enable get_tapping_term() function
 #define QUICK_TAP_TERM 0  // disable double-tap auto-repeat
+
+#define COMBO_TERM_PER_COMBO  // enable get_combo_term() function
+#define COMBO_MUST_TAP_PER_COMBO  // enable get_combo_must_tap() function
+#define EXTRA_SHORT_COMBOS  // limit combos to six keys to save memory
