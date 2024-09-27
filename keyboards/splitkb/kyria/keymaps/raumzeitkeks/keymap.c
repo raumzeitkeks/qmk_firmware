@@ -19,12 +19,12 @@
 
 enum layers {
     _BASE = 0,
+    _UML,
     _SYM1,
     _SYM2,
+    _NAV,
     _NUM,
     _FN,
-    _SCR,
-    _DEL,
     _VOL,
 };
 
@@ -211,20 +211,20 @@ bool caps_word_press_user(uint16_t keycode) {
     return false;
 }
 
+#define MO_UML  MO(_UML)
 #define MO_SYM1 MO(_SYM1)
 #define MO_SYM2 MO(_SYM2)
+#define MO_NAV  MO(_NAV)
 #define MO_NUM  MO(_NUM)
 #define MO_FN   MO(_FN)
-#define MO_SCR  MO(_SCR)
-#define MO_DEL  MO(_DEL)
 #define MO_VOL  MO(_VOL)
 
+#define UML(kc)  LT(_UML, kc)
 #define SYM1(kc) LT(_SYM1, kc)
 #define SYM2(kc) LT(_SYM2, kc)
+#define NAV(kc)  LT(_NAV, kc)
 #define NUM(kc)  LT(_NUM, kc)
 #define FN(kc)   LT(_FN, kc)
-#define SCR(kc)  LT(_SCR, kc)
-#define DEL(kc)  LT(_DEL, kc)
 #define VOL(kc)  LT(_VOL, kc)
 
 #define LG(kc) LGUI_T(kc)
@@ -252,59 +252,59 @@ bool caps_word_press_user(uint16_t keycode) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-                 KC_ESC, DE_X,     DE_W,     DEL(DE_M),  VOL(DE_G),  DE_Z,              DE_J,    VOL(DE_DOT), DEL(DE_COMM), DE_QUES,  DE_B,     DE_QUOT,
-                 DE_V,   LS(DE_S), LC(DE_R), SYM2(DE_N), SYM1(DE_T), KC_TAB,            KC_BSPC, NUM(DE_A),   FN(DE_E),     RC(DE_I), RS(DE_H), DE_K,
-                         DE_F,     DE_L,     DE_P,       SCR(DE_D),  KC_INS,            CW_TOGG, SCR(DE_O),   DE_U,         DE_Y,     DE_Q,
-                         MO_FN,    MO_NUM,   LA(DE_C),   LA(DE_C),   KC_LGUI,           KC_ENT,  LA(KC_SPC),  LA(KC_SPC),   MO_SYM1,  MO_SYM2
+             KC_ESC,  DE_X,     DE_W,      DE_M,       DE_G,       DE_Z,               DE_HASH, DE_DOT,    DE_COMM,    DE_DQUO,   KC_INS,   KC_ESC,
+             CW_TOGG, LS(DE_S), LC(DE_R),  SYM1(DE_N), SYM2(DE_T), DE_V,               DE_F,    NUM(DE_H), NAV(DE_A),  RC(DE_E),  RS(DE_I), CW_TOGG,
+                      DE_J,     VOL(DE_L), DE_P,       UML(DE_D),  DE_K,               DE_B,    FN(DE_U),  DE_O,       VOL(DE_Y), DE_Q,
+                      MO_FN,    MO_NUM,    LA(DE_C),   KC_ENT,     KC_LGUI,            KC_RGUI, KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            DE_TILD, DE_COLN, DE_DLR,  DE_EXLM, DE_CIRC, DE_DQUO,
-                       __XXX__, KC_LSFT, KC_LCTL, KC_DOWN, MO_SYM1, KC_TAB,             KC_BSPC, DE_LPRN, DE_RPRN, DE_LCBR, DE_RCBR, DE_AT,
-                                __XXX__, __XXX__, KC_UP,   __XXX__, __XXX__,            __XXX__, DE_SLSH, DE_ASTR, DE_PLUS, DE_PERC,
-                                __XXX__, __XXX__, KC_LALT, KC_LALT, KC_LGUI,            KC_ENT,  DE_MINS, DE_MINS, MO_SYM1, __XXX__
+                      KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME, KC_END,             DE_CIRC, DE_COLN, DE_EQL,  DE_QUOT, __XXX__, KC_ESC,
+                      __XXX__, KC_LSFT, KC_LCTL, MO_SYM1, KC_LEFT, KC_RGHT,            DE_QUES, DE_LPRN, DE_LBRC, DE_RBRC, DE_RPRN, __XXX__,
+                               __XXX__, __XXX__, __XXX__, KC_BSPC, KC_DEL,             DE_BSLS, DE_SLSH, DE_ASTR, DE_PLUS, DE_PERC,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  DE_UNDS, MO_SYM1, __XXX__
     ),
     [_SYM2] = DENSE_LAYOUT(
-                      KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME,  KC_END,             __XXX__, DE_SCLN, DE_HASH, DE_EQL,  DE_DEG,  DE_GRV,
-                      __XXX__, KC_LSFT, KC_LCTL, MO_SYM2, KC_RIGHT, KC_TAB,             KC_BSPC, DE_LBRC, DE_RBRC, DE_LABK, DE_RABK, DE_EURO,
-                               __XXX__, __XXX__, __XXX__, KC_LEFT,  __XXX__,            __XXX__, DE_BSLS, DE_PIPE, DE_AMPR, __XXX__,
-                               __XXX__, __XXX__, KC_LALT, KC_LALT,  KC_LGUI,            KC_ENT,  DE_UNDS, DE_UNDS, __XXX__, MO_SYM2
+                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__,            DE_DEG,  DE_SCLN, DE_DLR,  DE_GRV, __XXX__,  KC_ESC,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   MO_SYM2, __XXX__,            DE_EXLM, DE_LCBR, DE_LABK, DE_RABK, DE_RCBR, __XXX__,
+                               __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,            DE_AT,   DE_TILD, DE_PIPE, DE_AMPR, DE_EURO,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  DE_MINS, __XXX__, MO_SYM2
     ),
     [_NUM] = DENSE_LAYOUT(
-                         KC_ESC,  __XXX__,  DE_7,   DE_8,   DE_9,   __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-                         __XXX__, LS(DE_0), DE_1,   DE_2,   DE_3,   KC_TAB,             KC_BSPC, MO_NUM,  KC_DOWN, KC_RCTL, KC_RSFT, __XXX__,
-                                  __XXX__,  DE_4,   DE_5,   DE_6,   KC_INS,             __XXX__, __XXX__, KC_UP,   __XXX__, __XXX__,
-                                  __XXX__,  MO_NUM, DE_DOT, DE_DOT, KC_LGUI,            KC_ENT,  KC_LALT, KC_LALT, __XXX__, __XXX__
+                        KC_ESC,  __XXX__, DE_7,   DE_8,   DE_9,   __XXX__,            __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__, KC_ESC,
+                        __XXX__, DE_0,    DE_1,   DE_2,   DE_3,   __XXX__,            __XXX__, MO_NUM,  KC_UP,   KC_RCTL, KC_RSFT, __XXX__,
+                                 __XXX__, DE_4,   DE_5,   DE_6,   __XXX__,            __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,
+                                 __XXX__, MO_NUM, DE_DOT, KC_ENT, __XXX__,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
+    ),
+    [_NAV] = DENSE_LAYOUT(
+                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  KC_HOME, KC_END,             KC_HOME, KC_END,  __XXX__, __XXX__, __XXX__, KC_ESC,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   KC_LEFT, KC_RGHT,            KC_LEFT, KC_RGHT, MO_NAV,  KC_RCTL, KC_RSFT, __XXX__,
+                               __XXX__, __XXX__, KC_DOWN, KC_BSPC, KC_DEL,             KC_BSPC, KC_DEL,  __XXX__, __XXX__, __XXX__,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
+    ),
+    [_UML] = DENSE_LAYOUT(
+                      KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_ESC,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_PGUP, __XXX__, __XXX__,            __XXX__, DE_SS,   DE_ADIA, __XXX__, __XXX__, __XXX__,
+                               __XXX__, __XXX__, KC_PGDN, MO_UML,  __XXX__,            __XXX__, DE_UDIA, DE_ODIA, __XXX__, __XXX__,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  __XXX__, __XXX__, __XXX__
     ),
     [_FN] = DENSE_LAYOUT(
-                    KC_ESC,  KC_F12,     KC_F7,   KC_F8,   KC_F9,   __XXX__,            KC_HOME, KC_END,   __XXX__, __XXX__, __XXX__, __XXX__,
-                    __XXX__, LS(KC_F10), KC_F1,   KC_F2,   KC_F3,   __XXX__,            KC_BSPC, KC_RIGHT, MO_FN,   KC_RCTL, KC_RSFT, __XXX__,
-                             KC_F11,     KC_F4,   KC_F5,   KC_F6,   __XXX__,            __XXX__, KC_LEFT,  __XXX__, __XXX__, __XXX__,
-                             MO_FN,      __XXX__, __XXX__, __XXX__, KC_LGUI,            KC_ENT,  KC_LALT,  KC_LALT, __XXX__, __XXX__
-    ),
-    [_SCR] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-                       __XXX__, KC_LSFT, KC_LCTL, KC_PGDN, __XXX__, KC_TAB,             KC_BSPC, __XXX__, KC_PGDN, KC_RCTL, KC_RSFT, __XXX__,
-                                __XXX__, __XXX__, KC_PGUP, MO_SCR,  __XXX__,            __XXX__, MO_SCR,  KC_PGUP, __XXX__, __XXX__,
-                                __XXX__, __XXX__, KC_LALT, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, KC_LALT, __XXX__, __XXX__
-    ),
-    [_DEL] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, __XXX__, MO_DEL,  KC_DEL, KC_BSPC,             KC_BSPC, KC_DEL,  MO_DEL,  __XXX__, __XXX__, __XXX__,
-                       __XXX__, KC_LSFT, KC_LCTL, __XXX__, __XXX__, KC_TAB,             KC_BSPC, __XXX__, __XXX__, KC_RCTL, KC_RSFT, __XXX__,
-                                __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,
-                                __XXX__, __XXX__, KC_LALT, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, KC_LALT, __XXX__, __XXX__
+                       KC_ESC,  __XXX__, KC_F7,   KC_F8,   KC_F9,  KC_F12,             __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_ESC,
+                       __XXX__, __XXX__, KC_F1,   KC_F2,   KC_F3,  KC_F10,             __XXX__, __XXX__, KC_PGUP, KC_RCTL, KC_RSFT, __XXX__,
+                                __XXX__, KC_F4,   KC_F5,   KC_F6,  KC_F11,             __XXX__, MO_FN,   KC_PGDN, __XXX__, __XXX__,
+                                MO_FN,   __XXX__, __XXX__, KC_ENT, __XXX__,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_VOL] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, __XXX__, KC_MUTE, MO_VOL,  __XXX__,            __XXX__, MO_VOL,  KC_MUTE, __XXX__, __XXX__, __XXX__,
-                       __XXX__, KC_LSFT, KC_LCTL, KC_VOLD, __XXX__, KC_TAB,             KC_BSPC, __XXX__, KC_VOLD, KC_RCTL, KC_RSFT, __XXX__,
-                                __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,
-                                __XXX__, __XXX__, KC_LALT, KC_LALT, KC_LGUI,            KC_ENT,  KC_LALT, KC_LALT, __XXX__, __XXX__
+                      __XXX__, __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__,            __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__, __XXX__,
+                      __XXX__, __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__, __XXX__,
+                               __XXX__, MO_VOL,  KC_VOLD, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLD, MO_VOL,  __XXX__,
+                               __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__
     ),
 };
 
-const uint16_t PROGMEM combo_umlaut_ae[] = {NUM(DE_A), DE_Y, COMBO_END};
-const uint16_t PROGMEM combo_umlaut_oe[] = {SCR(DE_O), DE_Y, COMBO_END};
-const uint16_t PROGMEM combo_umlaut_ue[] = {DE_U,      DE_Y, COMBO_END};
-const uint16_t PROGMEM combo_umlaut_ss[] = {FN(DE_E),  DE_Y, COMBO_END};
+const uint16_t PROGMEM combo_umlaut_ae[] = {NAV(DE_A), RC(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_oe[] = {DE_O,      RC(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_ue[] = {FN(DE_U),  RC(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_ss[] = {NUM(DE_H), RC(DE_E), COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_umlaut_ae, DE_ADIA),
@@ -314,5 +314,9 @@ combo_t key_combos[] = {
 };
 
 bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    return true;
+}
+
+bool get_combo_must_press_in_order(uint16_t index, combo_t *combo) {
     return true;
 }

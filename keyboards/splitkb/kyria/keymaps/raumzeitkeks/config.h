@@ -24,4 +24,5 @@
 
 #define COMBO_TERM_PER_COMBO  // enable get_combo_term() function
 #define COMBO_MUST_TAP_PER_COMBO  // enable get_combo_must_tap() function
+#define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO  // enable get_combo_must_press_in_order() function
 #define EXTRA_SHORT_COMBOS  // limit combos to six keys to save memory
