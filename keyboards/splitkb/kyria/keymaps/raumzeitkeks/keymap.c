@@ -19,12 +19,12 @@
 
 enum layers {
     _BASE = 0,
-    _UML,
     _SYM1,
     _SYM2,
-    _NAV,
     _NUM,
     _FN,
+    _NAV,
+    _SCR,
     _VOL,
 };
 
@@ -32,9 +32,9 @@ enum custom_keycodes {
     TAPPING_TERM_INC = SAFE_RANGE,
     TAPPING_TERM_DEC,
     TAPPING_TERM_OUT,
-    COMBO_TERM_INC,
-    COMBO_TERM_DEC,
-    COMBO_TERM_OUT,
+    // COMBO_TERM_INC,
+    // COMBO_TERM_DEC,
+    // COMBO_TERM_OUT,
 };
 
 uint16_t g_tapping_term = TAPPING_TERM;
@@ -43,11 +43,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     return g_tapping_term;
 }
 
-uint16_t g_combo_term = COMBO_TERM;
+// uint16_t g_combo_term = COMBO_TERM;
 
-uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-    return g_combo_term;
-}
+// uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+//     return g_combo_term;
+// }
 
 void send_term(uint16_t term, uint8_t id1, uint8_t id2) {
     tap_code(id1);
@@ -76,18 +76,18 @@ bool process_term(uint16_t keycode, keyrecord_t *record) {
                 send_term(g_tapping_term, DE_T, DE_T);
                 return false;
             }
-            case COMBO_TERM_INC: {
-                g_combo_term += 10;
-                return false;
-            }
-            case COMBO_TERM_DEC: {
-                g_combo_term -= 10;
-                return false;
-            }
-            case COMBO_TERM_OUT: {
-                send_term(g_combo_term, DE_C, DE_T);
-                return false;
-            }
+            // case COMBO_TERM_INC: {
+            //     g_combo_term += 10;
+            //     return false;
+            // }
+            // case COMBO_TERM_DEC: {
+            //     g_combo_term -= 10;
+            //     return false;
+            // }
+            // case COMBO_TERM_OUT: {
+            //     send_term(g_combo_term, DE_C, DE_T);
+            //     return false;
+            // }
         }
     }
     return true;
@@ -211,20 +211,20 @@ bool caps_word_press_user(uint16_t keycode) {
     return false;
 }
 
-#define MO_UML  MO(_UML)
 #define MO_SYM1 MO(_SYM1)
 #define MO_SYM2 MO(_SYM2)
-#define MO_NAV  MO(_NAV)
 #define MO_NUM  MO(_NUM)
 #define MO_FN   MO(_FN)
+#define MO_NAV  MO(_NAV)
+#define MO_SCR  MO(_SCR)
 #define MO_VOL  MO(_VOL)
 
-#define UML(kc)  LT(_UML, kc)
 #define SYM1(kc) LT(_SYM1, kc)
 #define SYM2(kc) LT(_SYM2, kc)
-#define NAV(kc)  LT(_NAV, kc)
 #define NUM(kc)  LT(_NUM, kc)
 #define FN(kc)   LT(_FN, kc)
+#define NAV(kc)  LT(_NAV, kc)
+#define SCR(kc)  LT(_SCR, kc)
 #define VOL(kc)  LT(_VOL, kc)
 
 #define LG(kc) LGUI_T(kc)
@@ -240,58 +240,58 @@ bool caps_word_press_user(uint16_t keycode) {
 #define TTI TAPPING_TERM_INC
 #define TTD TAPPING_TERM_DEC
 #define TTO TAPPING_TERM_OUT
-#define CTI COMBO_TERM_INC
-#define CTD COMBO_TERM_DEC
-#define CTO COMBO_TERM_OUT
+// #define CTI COMBO_TERM_INC
+// #define CTD COMBO_TERM_DEC
+// #define CTO COMBO_TERM_OUT
 
 #define DENSE_LAYOUT(L30, L31, L32, L33, L34, L35, R35, R34, R33, R32, R31, R30, L20, L21, L22, L23, L24, L25, R25, R24, R23, R22, R21, R20, L11, L12, L13, L14, L15, R15, R14, R13, R12, R11, L00, L01, L02, L03, L04, R04, R03, R02, R01, R00) \
     LAYOUT( L30, L31, L32, L33, L34, L35,                     R35, R34, R33, R32, R31, R30, \
             L20, L21, L22, L23, L24, L25,                     R25, R24, R23, R22, R21, R20, \
-            TTO, L11, L12, L13, L14, L15, TTD, TTI, CTI, CTD, R15, R14, R13, R12, R11, CTO, \
+            TTO, L11, L12, L13, L14, L15, TTD, TTI, TTI, TTD, R15, R14, R13, R12, R11, TTO, \
                            L00, L01, L02, L03, L04, R04, R03, R02, R01, R00 )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-             KC_ESC,  DE_X,     DE_W,      DE_M,       DE_G,       DE_Z,               DE_HASH, DE_DOT,    DE_COMM,    DE_DQUO,   KC_INS,   KC_ESC,
-             CW_TOGG, LS(DE_S), LC(DE_R),  SYM1(DE_N), SYM2(DE_T), DE_V,               DE_F,    NUM(DE_H), NAV(DE_A),  RC(DE_E),  RS(DE_I), CW_TOGG,
-                      DE_J,     VOL(DE_L), DE_P,       UML(DE_D),  DE_K,               DE_B,    FN(DE_U),  DE_O,       VOL(DE_Y), DE_Q,
-                      MO_FN,    MO_NUM,    LA(DE_C),   KC_ENT,     KC_LGUI,            KC_RGUI, KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
+             KC_ESC,  DE_X,     DE_W,      DE_M,       DE_D,       DE_Z,               DE_K,     DE_B,      DE_COMM,    DE_DOT,    DE_DQUO,  KC_INS,
+             CW_TOGG, LS(DE_S), LC(DE_R),  SYM1(DE_N), SYM2(DE_T), SCR(DE_V),          FN(DE_G), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
+                      DE_J,     VOL(DE_L), DE_F,       KC_DEL,     DE_P,               DE_Y,     KC_BSPC,   DE_O,       VOL(DE_U), DE_Q,
+                      MO_FN,    MO_NUM,    LA(DE_C),   KC_ENT,     KC_LGUI,            KC_RGUI,  KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
-                      KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME, KC_END,             DE_CIRC, DE_COLN, DE_EQL,  DE_QUOT, __XXX__, KC_ESC,
-                      __XXX__, KC_LSFT, KC_LCTL, MO_SYM1, KC_LEFT, KC_RGHT,            DE_QUES, DE_LPRN, DE_LBRC, DE_RBRC, DE_RPRN, __XXX__,
-                               __XXX__, __XXX__, __XXX__, KC_BSPC, KC_DEL,             DE_BSLS, DE_SLSH, DE_ASTR, DE_PLUS, DE_PERC,
+                      KC_ESC,  __XXX__, __XXX__, __XXX__, KC_HOME, KC_END,             DE_DLR,  DE_SLSH, DE_TILD, DE_QUES, DE_QUOT, KC_INS,
+                      __XXX__, KC_LSFT, KC_LCTL, MO_SYM1, KC_LEFT, KC_RGHT,            DE_LABK, DE_LPRN, DE_LBRC, DE_LCBR, DE_ADIA, __XXX__,
+                               __XXX__, __XXX__, __XXX__, KC_DEL,  KC_BSPC,            DE_SS,   KC_BSPC, DE_ODIA, DE_UDIA, DE_AT,
                                __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  DE_UNDS, MO_SYM1, __XXX__
     ),
     [_SYM2] = DENSE_LAYOUT(
-                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__,            DE_DEG,  DE_SCLN, DE_DLR,  DE_GRV, __XXX__,  KC_ESC,
-                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   MO_SYM2, __XXX__,            DE_EXLM, DE_LCBR, DE_LABK, DE_RABK, DE_RCBR, __XXX__,
-                               __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,            DE_AT,   DE_TILD, DE_PIPE, DE_AMPR, DE_EURO,
+                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__,            DE_PLUS, DE_BSLS, DE_EQL,  DE_EXLM, DE_GRV,  KC_INS,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   MO_SYM2, __XXX__,            DE_RABK, DE_RPRN, DE_RBRC, DE_RCBR, DE_ASTR, __XXX__,
+                               __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,            DE_CIRC, KC_BSPC, DE_PIPE, DE_AMPR, DE_SECT,
                                __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  DE_MINS, __XXX__, MO_SYM2
     ),
     [_NUM] = DENSE_LAYOUT(
-                        KC_ESC,  __XXX__, DE_7,   DE_8,   DE_9,   __XXX__,            __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__, KC_ESC,
-                        __XXX__, DE_0,    DE_1,   DE_2,   DE_3,   __XXX__,            __XXX__, MO_NUM,  KC_UP,   KC_RCTL, KC_RSFT, __XXX__,
-                                 __XXX__, DE_4,   DE_5,   DE_6,   __XXX__,            __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,
-                                 __XXX__, MO_NUM, DE_DOT, KC_ENT, __XXX__,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
-    ),
-    [_NAV] = DENSE_LAYOUT(
-                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  KC_HOME, KC_END,             KC_HOME, KC_END,  __XXX__, __XXX__, __XXX__, KC_ESC,
-                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   KC_LEFT, KC_RGHT,            KC_LEFT, KC_RGHT, MO_NAV,  KC_RCTL, KC_RSFT, __XXX__,
-                               __XXX__, __XXX__, KC_DOWN, KC_BSPC, KC_DEL,             KC_BSPC, KC_DEL,  __XXX__, __XXX__, __XXX__,
-                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
-    ),
-    [_UML] = DENSE_LAYOUT(
-                      KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_ESC,
-                      __XXX__, KC_LSFT, KC_LCTL, KC_PGUP, __XXX__, __XXX__,            __XXX__, DE_SS,   DE_ADIA, __XXX__, __XXX__, __XXX__,
-                               __XXX__, __XXX__, KC_PGDN, MO_UML,  __XXX__,            __XXX__, DE_UDIA, DE_ODIA, __XXX__, __XXX__,
-                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            __XXX__, KC_ENT,  __XXX__, __XXX__, __XXX__
+                        KC_ESC,  DE_PERC, DE_7,   DE_8,    DE_9,   __XXX__,            __XXX__, __XXX__, KC_TAB,  __XXX__, __XXX__, KC_INS,
+                        __XXX__, DE_DOT,  DE_1,   DE_2,    DE_3,   DE_0,               __XXX__, MO_NUM,  KC_UP,   KC_RCTL, KC_RSFT, __XXX__,
+                                 DE_EURO, DE_4,   DE_5,    DE_6,   __XXX__,            __XXX__, __XXX__, KC_DOWN, __XXX__, __XXX__,
+                                 __XXX__, MO_NUM, DE_MINS, KC_ENT, __XXX__,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_FN] = DENSE_LAYOUT(
-                       KC_ESC,  __XXX__, KC_F7,   KC_F8,   KC_F9,  KC_F12,             __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_ESC,
-                       __XXX__, __XXX__, KC_F1,   KC_F2,   KC_F3,  KC_F10,             __XXX__, __XXX__, KC_PGUP, KC_RCTL, KC_RSFT, __XXX__,
-                                __XXX__, KC_F4,   KC_F5,   KC_F6,  KC_F11,             __XXX__, MO_FN,   KC_PGDN, __XXX__, __XXX__,
+                       KC_ESC,  __XXX__, KC_F7,   KC_F8,   KC_F9,  KC_F12,             __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_INS,
+                       __XXX__, __XXX__, KC_F1,   KC_F2,   KC_F3,  KC_F10,             MO_FN,   __XXX__, KC_PGUP, KC_RCTL, KC_RSFT, __XXX__,
+                                __XXX__, KC_F4,   KC_F5,   KC_F6,  KC_F11,             __XXX__, __XXX__, KC_PGDN, __XXX__, __XXX__,
                                 MO_FN,   __XXX__, __XXX__, KC_ENT, __XXX__,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
+    ),
+    [_NAV] = DENSE_LAYOUT(
+                      KC_ESC,  __XXX__, __XXX__, KC_TAB,  KC_HOME, KC_END,             KC_HOME, KC_END,  __XXX__, __XXX__, __XXX__, KC_INS,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_UP,   KC_LEFT, KC_RGHT,            KC_LEFT, KC_RGHT, MO_NAV,  KC_RCTL, KC_RSFT, __XXX__,
+                               __XXX__, __XXX__, KC_DOWN, KC_DEL,  KC_BSPC,            KC_DEL,  KC_BSPC,  __XXX__, __XXX__, __XXX__,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
+    ),
+    [_SCR] = DENSE_LAYOUT(
+                      KC_ESC,  __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__, KC_INS,
+                      __XXX__, KC_LSFT, KC_LCTL, KC_PGUP, __XXX__, MO_SCR,             __XXX__, __XXX__, KC_PGUP, KC_LCTL, KC_LSFT, __XXX__,
+                               __XXX__, __XXX__, KC_PGDN, __XXX__, __XXX__,            __XXX__, __XXX__, KC_PGDN, __XXX__, __XXX__,
+                               __XXX__, __XXX__, KC_LALT, KC_ENT,  KC_LGUI,            KC_LGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_VOL] = DENSE_LAYOUT(
                       __XXX__, __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__,            __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__, __XXX__,
@@ -301,22 +301,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-const uint16_t PROGMEM combo_umlaut_ae[] = {NAV(DE_A), RC(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_oe[] = {DE_O,      RC(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_ue[] = {FN(DE_U),  RC(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_ss[] = {NUM(DE_H), RC(DE_E), COMBO_END};
+// const uint16_t PROGMEM combo_umlaut_ae[] = {FOO(DE_A), FOO(DE_E), COMBO_END};
+// const uint16_t PROGMEM combo_umlaut_oe[] = {FOO(DE_O), FOO(DE_E), COMBO_END};
+// const uint16_t PROGMEM combo_umlaut_ue[] = {FOO(DE_U), FOO(DE_E), COMBO_END};
 
-combo_t key_combos[] = {
-    COMBO(combo_umlaut_ae, DE_ADIA),
-    COMBO(combo_umlaut_oe, DE_ODIA),
-    COMBO(combo_umlaut_ue, DE_UDIA),
-    COMBO(combo_umlaut_ss, DE_SS),
-};
+// combo_t key_combos[] = {
+//     COMBO(combo_umlaut_ae, DE_ADIA),
+//     COMBO(combo_umlaut_oe, DE_ODIA),
+//     COMBO(combo_umlaut_ue, DE_UDIA),
+// };
 
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-    return true;
-}
+// bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+//     return true;
+// }
 
-bool get_combo_must_press_in_order(uint16_t index, combo_t *combo) {
-    return true;
-}
+// bool get_combo_must_press_in_order(uint16_t index, combo_t *combo) {
+//     return true;
+// }
