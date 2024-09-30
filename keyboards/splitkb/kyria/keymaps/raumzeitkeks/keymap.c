@@ -292,7 +292,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            KC_ESC,  KC_BSPC, DE_7,   DE_8, DE_9,    DE_PERC,            __XXX__, __XXX__, KC_TAB,      __XXX__, KC_BSPC, KC_ESC,
                            __XXX__, DE_DOT,  DE_1,   DE_2, DE_3,    DE_0,               __XXX__, MO_NUM,  KC_UP,       KC_RCTL, KC_RSFT, __XXX__,
                                     KC_DEL,  DE_4,   DE_5, DE_6,    DE_EURO,            __XXX__, __XXX__, KC_DOWN,     __XXX__, KC_DEL,
-                                    __XXX__, MO_NUM, DE_0, __XXX__, __XXX__,            KC_RGUI, KC_ENT,  LA(KC_MINS), __XXX__, __XXX__
+                                    __XXX__, MO_NUM, DE_0, __XXX__, __XXX__,            KC_RGUI, KC_ENT,  LA(DE_MINS), __XXX__, __XXX__
     ),
     [_FN] = DENSE_LAYOUT(
                           KC_ESC,  KC_BSPC, KC_F7,   KC_F8,  KC_F9,  KC_F12,            __XXX__, __XXX__, __XXX__, __XXX__, KC_BSPC, KC_ESC,
