@@ -259,7 +259,7 @@ bool caps_word_press_user(uint16_t keycode) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
             KC_ESC,  KC_BSPC,  DE_W,      DE_M,       DE_G,       DE_J,                 DE_Q,        DE_D,      DE_COMM,    DE_QUES,   KC_BSPC,  KC_ESC,
-            CW_TOGG, LS(DE_R), LC(DE_S),  SYM1(DE_N), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
+            CW_TOGG, LS(DE_S), LC(DE_N),  SYM1(DE_R), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
                      KC_DEL,   VOL(DE_F), DE_L,       DE_K,       DE_Z,                 DE_Y,        DE_B,      DE_O,       VOL(DE_U), KC_DEL,
                      MO_FN,    MO_NUM,    LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
     ),
@@ -310,7 +310,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM combo_umlaut_ae[] = {RS(DE_A),  NAV(DE_E), COMBO_END};
 const uint16_t PROGMEM combo_umlaut_oe[] = {DE_O,      NAV(DE_E), COMBO_END};
 const uint16_t PROGMEM combo_umlaut_ue[] = {VOL(DE_U), NAV(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_sz[] = {LC(DE_S),  DE_Z,      COMBO_END};
+const uint16_t PROGMEM combo_umlaut_sz[] = {LS(DE_S),  DE_Z,      COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_umlaut_ae, DE_ADIA),
