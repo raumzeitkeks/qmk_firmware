@@ -223,7 +223,6 @@ bool caps_word_press_user(uint16_t keycode) {
 #define MO_NAV  MO(_NAV)
 #define MO_NUM  MO(_NUM)
 #define MO_FN   MO(_FN)
-#define MO_VOL  MO(_VOL)
 
 #define SYM1(kc) LT(_SYM1, kc)
 #define SYM2(kc) LT(_SYM2, kc)
@@ -231,7 +230,6 @@ bool caps_word_press_user(uint16_t keycode) {
 #define NAV(kc)  LT(_NAV, kc)
 #define NUM(kc)  LT(_NUM, kc)
 #define FN(kc)   LT(_FN, kc)
-#define VOL(kc)  LT(_VOL, kc)
 
 #define LG(kc) LGUI_T(kc)
 #define LC(kc) LCTL_T(kc)
@@ -249,19 +247,22 @@ bool caps_word_press_user(uint16_t keycode) {
 #define TTI TAPPING_TERM_INC
 #define TTD TAPPING_TERM_DEC
 #define TTO TAPPING_TERM_OUT
+#define VLO KC_MUTE
+#define VLI KC_VOLU
+#define VLD KC_VOLD
 
 #define DENSE_LAYOUT(L30, L31, L32, L33, L34, L35, R35, R34, R33, R32, R31, R30, L20, L21, L22, L23, L24, L25, R25, R24, R23, R22, R21, R20, L11, L12, L13, L14, L15, R15, R14, R13, R12, R11, L00, L01, L02, L03, L04, R04, R03, R02, R01, R00) \
     LAYOUT( L30, L31, L32, L33, L34, L35,                     R35, R34, R33, R32, R31, R30, \
             L20, L21, L22, L23, L24, L25,                     R25, R24, R23, R22, R21, R20, \
-            TTO, L11, L12, L13, L14, L15, TTD, TTI, TTI, TTD, R15, R14, R13, R12, R11, TTO, \
+            VLO, L11, L12, L13, L14, L15, VLD, VLI, TTI, TTD, R15, R14, R13, R12, R11, TTO, \
                            L00, L01, L02, L03, L04, R04, R03, R02, R01, R00 )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-            KC_ESC,  KC_BSPC,  DE_W,      DE_M,       DE_G,       DE_J,                 DE_Q,        DE_D,      DE_COMM,    DE_QUES,   KC_BSPC,  KC_ESC,
-            CW_TOGG, LS(DE_S), LC(DE_N),  SYM1(DE_R), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
-                     KC_DEL,   VOL(DE_F), DE_L,       DE_K,       DE_Z,                 DE_Y,        DE_B,      DE_O,       VOL(DE_U), KC_DEL,
-                     MO_FN,    MO_NUM,    LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
+             KC_ESC,  KC_BSPC,  DE_W,     DE_M,       DE_K,       DE_J,                 DE_Q,        DE_B,      DE_COMM,    DE_QUES,   KC_BSPC,  KC_ESC,
+             CW_TOGG, LS(DE_S), LC(DE_N), SYM1(DE_R), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
+                      KC_DEL,   DE_F,     DE_L,       DE_G,       DE_Z,                 DE_Y,        DE_D,      DE_O,       DE_U,      KC_DEL,
+                      MO_FN,    MO_NUM,   LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
                        KC_ESC,  KC_BSPC, __XXX__, __XXX__, KC_HOME, __XXX__,            DE_AT,   DE_SLSH, DE_DOT,  DE_TILD, KC_BSPC, KC_ESC,
@@ -299,18 +300,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                    KC_DEL,  KC_F4,   KC_F5,  KC_F6,  KC_F11,            __XXX__, __XXX__, KC_PGDN, __XXX__, KC_DEL,
                                    MO_FN,   __XXX__, KC_F10, KC_F11, KC_F12,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
-    [_VOL] = DENSE_LAYOUT(
-                       __XXX__, __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__,            __XXX__, __XXX__, KC_MUTE, __XXX__, __XXX__, __XXX__,
-                       __XXX__, __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLU, __XXX__, __XXX__, __XXX__,
-                                __XXX__, MO_VOL,  KC_VOLD, __XXX__, __XXX__,            __XXX__, __XXX__, KC_VOLD, MO_VOL,  __XXX__,
-                                __XXX__, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, __XXX__
-    ),
 };
 
-const uint16_t PROGMEM combo_umlaut_ae[] = {RS(DE_A),  NAV(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_oe[] = {DE_O,      NAV(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_ue[] = {VOL(DE_U), NAV(DE_E), COMBO_END};
-const uint16_t PROGMEM combo_umlaut_sz[] = {LS(DE_S),  DE_Z,      COMBO_END};
+const uint16_t PROGMEM combo_umlaut_ae[] = {RS(DE_A), NAV(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_oe[] = {DE_O,     NAV(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_ue[] = {DE_U,     NAV(DE_E), COMBO_END};
+const uint16_t PROGMEM combo_umlaut_sz[] = {LS(DE_S), DE_Z,      COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_umlaut_ae, DE_ADIA),
