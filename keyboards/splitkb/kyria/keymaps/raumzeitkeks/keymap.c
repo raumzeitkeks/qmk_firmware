@@ -241,6 +241,7 @@ bool caps_word_press_user(uint16_t keycode) {
 
 #define LA_COPY LA(KC_COPY)
 #define LG_CUT  LA(KC_CUT)
+#define LA_SPC  LA(KC_SPC)
 
 #define __XXX__ KC_NO
 
@@ -259,28 +260,28 @@ bool caps_word_press_user(uint16_t keycode) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-             KC_ESC,  KC_BSPC,  DE_W,     DE_M,       DE_K,       DE_J,                 DE_Q,        DE_B,      DE_COMM,    DE_QUES,   KC_BSPC,  KC_ESC,
-             CW_TOGG, LS(DE_S), LC(DE_N), SYM1(DE_R), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E),  RC(DE_I),  RS(DE_A), CW_TOGG,
-                      KC_DEL,   DE_F,     DE_L,       DE_G,       DE_Z,                 DE_Y,        DE_D,      DE_O,       DE_U,      KC_DEL,
-                      MO_FN,    MO_NUM,   LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA(KC_SPC), MO_SYM1,   MO_SYM2
+             KC_ESC,  DE_B,     DE_W,     DE_M,       DE_G,       DE_J,                 DE_AT,       DE_DOT,    DE_MINS,   DE_Y,      KC_BSPC,  KC_ESC,
+             CW_TOGG, LS(DE_S), LC(DE_R), SYM1(DE_N), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E), RC(DE_I),  RS(DE_A), CW_TOGG,
+                      DE_K,     DE_L,     DE_F,       DE_D,       DE_Z,                 DE_Q,        DE_COMM,   DE_O,      DE_U,      KC_DEL,
+                      MO_FN,    MO_NUM,   LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA_SPC,    MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
-                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, KC_HOME, __XXX__,            DE_AT,   DE_SLSH, DE_DOT,  DE_TILD, KC_BSPC, KC_ESC,
+                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, KC_HOME, __XXX__,            DE_BSLS, DE_SLSH, DE_TILD, DE_QUES, KC_BSPC, KC_ESC,
                        __XXX__, KC_LSFT, KC_LCTL, MO_SYM1, KC_LEFT, KC_RGHT,            DE_QUOT, DE_LPRN, DE_LBRC, DE_LABK, DE_ASTR, __XXX__,
-                                KC_DEL,  __XXX__, __XXX__, KC_END,  KC_UNDO,            DE_BSLS, DE_LCBR, DE_DLR,  DE_PERC, KC_DEL,
-                                __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  DE_UNDS, MO_SYM1, __XXX__
+                                KC_DEL,  __XXX__, __XXX__, KC_END,  KC_UNDO,            DE_EURO, DE_LCBR, DE_DLR,  DE_PERC, KC_DEL,
+                                __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  MO_SYM1, __XXX__
     ),
     [_SYM2] = DENSE_LAYOUT(
-                      KC_ESC,  KC_BSPC, __XXX__, KC_TAB,  __XXX__,  __XXX__,            DE_SECT, DE_HASH, DE_EQL,  DE_EXLM, KC_BSPC, KC_ESC,
+                      KC_ESC,  KC_BSPC, __XXX__, KC_TAB,  __XXX__,  __XXX__,            DE_CIRC, DE_HASH, DE_EQL,  DE_EXLM, KC_BSPC, KC_ESC,
                       __XXX__, KC_LSFT, KC_LCTL, KC_UP,   MO_SYM2,  __XXX__,            DE_GRV,  DE_RPRN, DE_RBRC, DE_RABK, DE_PLUS, __XXX__,
-                               KC_DEL,  __XXX__, KC_DOWN, __XXX__,  KC_UNDO,            DE_CIRC, DE_RCBR, DE_PIPE, DE_AMPR, KC_DEL,
-                               __XXX__, __XXX__, LA_COPY, KC_PSTE,  LG_CUT,             __XXX__, KC_ENT,  DE_MINS, __XXX__, MO_SYM2
+                               KC_DEL,  __XXX__, KC_DOWN, __XXX__,  __XXX__,            DE_SECT, DE_RCBR, DE_PIPE, DE_AMPR, KC_DEL,
+                               __XXX__, __XXX__, LA_COPY, KC_PSTE,  LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  __XXX__, MO_SYM2
     ),
     [_UML] = DENSE_LAYOUT(
-                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, __XXX__, KC_BSPC, KC_ESC,
+                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, DE_SS,   KC_BSPC, KC_ESC,
                        __XXX__, KC_LSFT, KC_LCTL, KC_PGUP, __XXX__, MO_UML,             __XXX__, __XXX__, __XXX__, __XXX__, DE_ADIA, __XXX__,
-                                KC_DEL,  __XXX__, KC_PGDN, __XXX__, KC_UNDO,            __XXX__, DE_SS,   DE_ODIA, DE_UDIA, KC_DEL,
-                                __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  __XXX__, __XXX__, __XXX__
+                                KC_DEL,  __XXX__, KC_PGDN, __XXX__, __XXX__,            __XXX__, __XXX__, DE_ODIA, DE_UDIA, KC_DEL,
+                                __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  __XXX__, __XXX__
     ),
     [_NAV] = DENSE_LAYOUT(
                       KC_ESC,  KC_BSPC, __XXX__, KC_TAB,  KC_HOME,  __XXX__,            __XXX__, KC_HOME, __XXX__, __XXX__, KC_BSPC, KC_ESC,
@@ -289,15 +290,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                __XXX__, __XXX__, LA_COPY, KC_PSTE,  LG_CUT,             KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_NUM] = DENSE_LAYOUT(
-                           KC_ESC,  KC_BSPC, DE_7,   DE_8, DE_9,    DE_PERC,            __XXX__, __XXX__, KC_TAB,      __XXX__, KC_BSPC, KC_ESC,
-                           __XXX__, DE_DOT,  DE_1,   DE_2, DE_3,    DE_0,               __XXX__, MO_NUM,  KC_UP,       KC_RCTL, KC_RSFT, __XXX__,
-                                    KC_DEL,  DE_4,   DE_5, DE_6,    DE_EURO,            __XXX__, __XXX__, KC_DOWN,     __XXX__, KC_DEL,
-                                    __XXX__, MO_NUM, DE_0, __XXX__, __XXX__,            KC_RGUI, KC_ENT,  LA(DE_MINS), __XXX__, __XXX__
+                           KC_ESC,  DE_MINS, DE_7,   DE_8, DE_9,    DE_PERC,            __XXX__, __XXX__, KC_TAB,  __XXX__, KC_BSPC, KC_ESC,
+                           __XXX__, DE_DOT,  DE_1,   DE_2, DE_3,    DE_0,               __XXX__, MO_NUM,  KC_UP,   KC_RCTL, KC_RSFT, __XXX__,
+                                    DE_COMM, DE_4,   DE_5, DE_6,    DE_EURO,            __XXX__, __XXX__, KC_DOWN, __XXX__, KC_DEL,
+                                    __XXX__, MO_NUM, DE_0, __XXX__, __XXX__,            KC_RGUI, KC_ENT,  LA_SPC,  __XXX__, __XXX__
     ),
     [_FN] = DENSE_LAYOUT(
-                          KC_ESC,  KC_BSPC, KC_F7,   KC_F8,  KC_F9,  KC_F12,            __XXX__, __XXX__, __XXX__, __XXX__, KC_BSPC, KC_ESC,
+                          KC_ESC,  __XXX__, KC_F7,   KC_F8,  KC_F9,  KC_F12,            __XXX__, __XXX__, __XXX__, __XXX__, KC_BSPC, KC_ESC,
                           __XXX__, __XXX__, KC_F1,   KC_F2,  KC_F3,  KC_F10,            MO_FN,   __XXX__, KC_PGUP, KC_RCTL, KC_RSFT, KC_INS,
-                                   KC_DEL,  KC_F4,   KC_F5,  KC_F6,  KC_F11,            __XXX__, __XXX__, KC_PGDN, __XXX__, KC_DEL,
+                                   __XXX__, KC_F4,   KC_F5,  KC_F6,  KC_F11,            __XXX__, __XXX__, KC_PGDN, __XXX__, KC_DEL,
                                    MO_FN,   __XXX__, KC_F10, KC_F11, KC_F12,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
 };
