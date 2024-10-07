@@ -21,7 +21,6 @@ enum layers {
     _BASE = 0,
     _SYM1,
     _SYM2,
-    _UML,
     _NAV,
     _NUM,
     _FN,
@@ -219,14 +218,12 @@ bool caps_word_press_user(uint16_t keycode) {
 
 #define MO_SYM1 MO(_SYM1)
 #define MO_SYM2 MO(_SYM2)
-#define MO_UML  MO(_UML)
 #define MO_NAV  MO(_NAV)
 #define MO_NUM  MO(_NUM)
 #define MO_FN   MO(_FN)
 
 #define SYM1(kc) LT(_SYM1, kc)
 #define SYM2(kc) LT(_SYM2, kc)
-#define UML(kc)  LT(_UML, kc)
 #define NAV(kc)  LT(_NAV, kc)
 #define NUM(kc)  LT(_NUM, kc)
 #define FN(kc)   LT(_FN, kc)
@@ -261,14 +258,14 @@ bool caps_word_press_user(uint16_t keycode) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
              KC_ESC,  DE_B,     DE_W,     DE_M,       DE_G,       DE_J,                 DE_AT,       DE_DOT,    DE_MINS,   DE_Y,      KC_BSPC,  KC_ESC,
-             CW_TOGG, LS(DE_S), LC(DE_R), SYM1(DE_N), SYM2(DE_T), UML(DE_P),            FN(BK_DQUO), NUM(DE_H), NAV(DE_E), RC(DE_I),  RS(DE_A), CW_TOGG,
+             CW_TOGG, LS(DE_S), LC(DE_R), SYM1(DE_N), SYM2(DE_T), DE_P,                 FN(BK_DQUO), NUM(DE_H), NAV(DE_E), RC(DE_I),  RS(DE_A), CW_TOGG,
                       DE_K,     DE_L,     DE_F,       DE_D,       DE_Z,                 DE_Q,        DE_COMM,   DE_O,      DE_U,      KC_DEL,
                       MO_FN,    MO_NUM,   LA(DE_C),   DE_V,       LG(DE_X),             KC_RGUI,     KC_ENT,    LA_SPC,    MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
-                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, KC_HOME, __XXX__,            DE_BSLS, DE_SLSH, DE_TILD, DE_QUES, KC_BSPC, KC_ESC,
+                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, KC_HOME, KC_PGUP,            DE_BSLS, DE_SLSH, DE_TILD, DE_QUES, KC_BSPC, KC_ESC,
                        __XXX__, KC_LSFT, KC_LCTL, MO_SYM1, KC_LEFT, KC_RGHT,            DE_QUOT, DE_LPRN, DE_LBRC, DE_LABK, DE_ASTR, __XXX__,
-                                KC_DEL,  __XXX__, __XXX__, KC_END,  KC_UNDO,            DE_EURO, DE_LCBR, DE_DLR,  DE_PERC, KC_DEL,
+                                KC_DEL,  __XXX__, __XXX__, KC_END,  KC_PGDN,            DE_EURO, DE_LCBR, DE_DLR,  DE_PERC, KC_DEL,
                                 __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  MO_SYM1, __XXX__
     ),
     [_SYM2] = DENSE_LAYOUT(
@@ -277,16 +274,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                KC_DEL,  __XXX__, KC_DOWN, __XXX__,  __XXX__,            DE_SECT, DE_RCBR, DE_PIPE, DE_AMPR, KC_DEL,
                                __XXX__, __XXX__, LA_COPY, KC_PSTE,  LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  __XXX__, MO_SYM2
     ),
-    [_UML] = DENSE_LAYOUT(
-                       KC_ESC,  KC_BSPC, __XXX__, __XXX__, __XXX__, __XXX__,            __XXX__, __XXX__, __XXX__, DE_SS,   KC_BSPC, KC_ESC,
-                       __XXX__, KC_LSFT, KC_LCTL, KC_PGUP, __XXX__, MO_UML,             __XXX__, __XXX__, __XXX__, __XXX__, DE_ADIA, __XXX__,
-                                KC_DEL,  __XXX__, KC_PGDN, __XXX__, __XXX__,            __XXX__, __XXX__, DE_ODIA, DE_UDIA, KC_DEL,
-                                __XXX__, __XXX__, LA_COPY, KC_PSTE, LG_CUT,             __XXX__, KC_ENT,  KC_SPC,  __XXX__, __XXX__
-    ),
     [_NAV] = DENSE_LAYOUT(
-                      KC_ESC,  KC_BSPC, __XXX__, KC_TAB,  KC_HOME,  __XXX__,            __XXX__, KC_HOME, __XXX__, __XXX__, KC_BSPC, KC_ESC,
+                      KC_ESC,  KC_BSPC, __XXX__, KC_TAB,  KC_HOME,  __XXX__,            KC_PGUP, KC_HOME, __XXX__, __XXX__, KC_BSPC, KC_ESC,
                       __XXX__, KC_LSFT, KC_LCTL, KC_UP,   KC_LEFT,  KC_RGHT,            KC_LEFT, KC_RGHT, MO_NAV,  KC_RCTL, KC_RSFT, __XXX__,
-                               KC_DEL,  __XXX__, KC_DOWN, KC_END,   KC_UNDO,            __XXX__, KC_END,  __XXX__, __XXX__, KC_DEL,
+                               KC_DEL,  __XXX__, KC_DOWN, KC_END,   KC_UNDO,            KC_PGDN, KC_END,  __XXX__, __XXX__, KC_DEL,
                                __XXX__, __XXX__, LA_COPY, KC_PSTE,  LG_CUT,             KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
     [_NUM] = DENSE_LAYOUT(
@@ -297,8 +288,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FN] = DENSE_LAYOUT(
                           KC_ESC,  __XXX__, KC_F7,   KC_F8,  KC_F9,  KC_F12,            __XXX__, __XXX__, __XXX__, __XXX__, KC_BSPC, KC_ESC,
-                          __XXX__, __XXX__, KC_F1,   KC_F2,  KC_F3,  KC_F10,            MO_FN,   __XXX__, KC_PGUP, KC_RCTL, KC_RSFT, KC_INS,
-                                   __XXX__, KC_F4,   KC_F5,  KC_F6,  KC_F11,            __XXX__, __XXX__, KC_PGDN, __XXX__, KC_DEL,
+                          __XXX__, __XXX__, KC_F1,   KC_F2,  KC_F3,  KC_F10,            MO_FN,   __XXX__, __XXX__, KC_RCTL, KC_RSFT, __XXX__,
+                                   __XXX__, KC_F4,   KC_F5,  KC_F6,  KC_F11,            __XXX__, __XXX__, __XXX__, KC_INS,  KC_DEL,
                                    MO_FN,   __XXX__, KC_F10, KC_F11, KC_F12,            KC_RGUI, KC_ENT,  KC_LALT, __XXX__, __XXX__
     ),
 };
