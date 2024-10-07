@@ -36,7 +36,7 @@ enum custom_keycodes {
     COMBO_TERM_OUT,
 
     // Basic keycodes for LT()
-    BK_DQUO = KC_INTERNATIONAL_9,
+    BK_QUO = KC_INTERNATIONAL_9,
 };
 
 uint16_t g_tapping_term = TAPPING_TERM;
@@ -118,8 +118,8 @@ bool process_remap(uint16_t keycode, keyrecord_t *record) {
             remap_keycode = is_shift_pressed ? C(DE_Y) : C(DE_Z);
             break;
         }
-        case BK_DQUO: {
-            remap_keycode = DE_DQUO;
+        case BK_QUO: {
+            remap_keycode = is_shift_pressed ? DE_QUOT : DE_DQUO;
             break;
         }
     }
@@ -255,10 +255,10 @@ bool caps_word_press_user(uint16_t keycode) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = DENSE_LAYOUT(
-                             DE_J,     DE_L,       DE_F,       DE_D,                KC_BSPC,     DE_DOT,    DE_MINS,   DE_Q,
-             DE_K, LS(DE_S), LC(DE_R), SYM1(DE_N), SYM2(DE_T), DE_B,                FN(BK_DQUO), NUM(DE_H), NAV(DE_E), RC(DE_I),  RS(DE_A), DE_Y,
-                   DE_X,     DE_W,     DE_M,       DE_G,       DE_P,                KC_DEL,      DE_COMM,   DE_O,      DE_U,      DE_Z,
-                             MO_FN,    MO_NUM,     LA(DE_C),   LG(DE_V),            KC_ENT,      KC_SPC,    MO_SYM1,   MO_SYM2
+                             DE_J,     DE_L,       DE_F,       DE_D,                KC_BSPC,    DE_DOT,    DE_MINS,   DE_Q,
+             DE_K, LS(DE_S), LC(DE_R), SYM1(DE_N), SYM2(DE_T), DE_B,                FN(BK_QUO), NUM(DE_H), NAV(DE_E), RC(DE_I),  RS(DE_A), DE_Y,
+                   DE_X,     DE_W,     DE_M,       DE_G,       DE_P,                KC_DEL,     DE_COMM,   DE_O,      DE_U,      DE_Z,
+                             MO_FN,    MO_NUM,     LA(DE_C),   LG(DE_V),            KC_ENT,     KC_SPC,    MO_SYM1,   MO_SYM2
     ),
     [_SYM1] = DENSE_LAYOUT(
                                      __XXX__, __XXX__, KC_HOME, KC_PGUP,            KC_BSPC, DE_SLSH, DE_TILD, DE_QUES,
